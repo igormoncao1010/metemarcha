@@ -1,0 +1,3669 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instituto Mete Marcha - Escola de Pilotos</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- FAVICON - LOGO NA ABA DO NAVEGADOR -->
+    <link rel="icon" type="image/png" href="logo.png">
+    <link rel="shortcut icon" type="image/png" href="logo.png">
+    <style>
+        /* MANTIDO TODO O DESIGN ORIGINAL QUE ESTAVA BONITO */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', 'Segoe UI', 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: #f5f7fa;
+            color: #1e293b;
+            overflow-x: hidden;
+        }
+
+        body.form-aberto {
+            overflow: hidden;
+        }
+
+        /* CORES VERMELHAS */
+        :root {
+            --vermelho-principal: #ff0000;
+            --vermelho-claro: #ff4d4d;
+            --vermelho-escuro: #cc0000;
+            --vermelho-opaco: rgba(255, 0, 0, 0.1);
+            --vermelho-gradiente: linear-gradient(135deg, #ff0000, #cc0000);
+        }
+
+        /* EFEITOS DE SCROLL - ANIMAÇÕES */
+        .reveal {
+            position: relative;
+            opacity: 0;
+            transform: translateY(50px) scale(0.95);
+            transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+
+        .reveal-left {
+            position: relative;
+            opacity: 0;
+            transform: translateX(-50px);
+            transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+        }
+
+        .reveal-left.active {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .reveal-right {
+            position: relative;
+            opacity: 0;
+            transform: translateX(50px);
+            transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+        }
+
+        .reveal-right.active {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .reveal-scale {
+            position: relative;
+            opacity: 0;
+            transform: scale(0.8);
+            transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+        }
+
+        .reveal-scale.active {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        /* TOP BAR 1 - BRANCA COM TEXTO ROLANTE */
+        .top-bar {
+            background: white;
+            color: #1e293b;
+            padding: 0.3rem 0;
+            font-size: 0.85rem;
+            font-weight: 500;
+            overflow: hidden;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+            position: relative;
+            width: 100%;
+        }
+
+        .scrolling-text {
+            display: flex;
+            white-space: nowrap;
+            animation: scrollLeft 20s linear infinite;
+            width: fit-content;
+        }
+
+        .scrolling-text span {
+            display: inline-flex;
+            align-items: center;
+            gap: 2rem;
+            padding-right: 2rem;
+        }
+
+        .scrolling-text i {
+            color: var(--vermelho-principal);
+            margin-right: 0.5rem;
+            font-size: 0.8rem;
+        }
+
+        @keyframes scrollLeft {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        /* TOP BAR 2 - BARRA VERMELHA COM COTAÇÕES - APENAS LINHA FINA */
+        .quotes-bar {
+            background: var(--vermelho-principal);
+            color: white;
+            padding: 0.3rem 1rem;
+            font-size: 0.85rem;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            width: 100%;
+            line-height: 1.2;
+        }
+
+        .quotes-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .quote-item {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            white-space: nowrap;
+        }
+
+        .quote-item i {
+            font-size: 0.8rem;
+        }
+
+        .quote-up {
+            color: #a3ffa3;
+        }
+
+        .quote-down {
+            color: #ffa3a3;
+        }
+
+        .quote-value {
+            font-weight: 600;
+        }
+
+        .quote-change {
+            display: flex;
+            align-items: center;
+            gap: 0.2rem;
+            font-size: 0.75rem;
+        }
+
+        /* Glass Header - AGORA COM ÍCONES DO LADO DO HAMBURGUER */
+        .header {
+            background: rgba(10, 20, 30, 0.95);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 0, 0, 0.2);
+            padding: 0.8rem 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .header.scrolled {
+            padding: 0.5rem 2rem;
+            background: rgba(5, 10, 15, 0.98);
+            box-shadow: 0 10px 40px rgba(255, 0, 0, 0.2);
+        }
+
+        /* Container do Logo SVG - MESMO ESTILO */
+        .logo-container {
+            height: 40px;
+            width: auto;
+            display: flex;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .header.scrolled .logo-container {
+            height: 40px;
+        }
+
+        .logo-svg {
+            height: 100%;
+            width: auto;
+            background: rgba(255,255,255,0.1);
+            padding: 5px 15px;
+            border-radius: 8px;
+            border: 1px dashed rgba(255, 0, 0, 0.3);
+            color: rgba(255,255,255,0.5);
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-svg i {
+            color: var(--vermelho-principal);
+            font-size: 1.5rem;
+        }
+
+        /* Container da direita com ícones e hamburguer */
+        .right-side {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .header-icons {
+            display: flex;
+            gap: 0.5rem;
+            color: white;
+            font-size: 1.2rem;
+        }
+
+        .header-icons i {
+            cursor: pointer;
+            transition: 0.3s;
+            background: rgba(255,255,255,0.1);
+            padding: 0.5rem;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .header-icons i:hover {
+            background: var(--vermelho-principal);
+            color: #0a141e;
+            transform: translateY(-2px) scale(1.1);
+        }
+
+        /* Hamburger Icon - AGORA VISÍVEL EM TODAS AS TELAS */
+        .hamburger {
+            display: flex;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 6px;
+            z-index: 1001;
+            margin-left: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .hamburger:hover span {
+            background: var(--vermelho-claro);
+            transform: scaleX(1.1);
+        }
+
+        .hamburger span {
+            width: 30px;
+            height: 3px;
+            background: var(--vermelho-principal);
+            border-radius: 3px;
+            transition: 0.3s;
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(8px, 6px);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(8px, -6px);
+        }
+
+        /* Mobile/Desktop Menu - AGORA FUNCIONA PARA TODAS AS TELAS */
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 80%;
+            max-width: 400px;
+            height: 100vh;
+            background: rgba(10, 20, 30, 0.98);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            padding: 6rem 2rem 2rem;
+            transition: 0.3s;
+            z-index: 999;
+            border-left: 1px solid rgba(255, 0, 0, 0.2);
+        }
+
+        .mobile-menu.active {
+            right: 0;
+        }
+
+        .mobile-menu ul {
+            list-style: none;
+        }
+
+        .mobile-menu li {
+            margin-bottom: 1.5rem;
+            opacity: 0;
+            transform: translateX(20px);
+            transition: all 0.3s ease;
+        }
+
+        .mobile-menu.active li {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .mobile-menu.active li:nth-child(1) { transition-delay: 0.1s; }
+        .mobile-menu.active li:nth-child(2) { transition-delay: 0.2s; }
+        .mobile-menu.active li:nth-child(3) { transition-delay: 0.3s; }
+        .mobile-menu.active li:nth-child(4) { transition-delay: 0.4s; }
+        .mobile-menu.active li:nth-child(5) { transition-delay: 0.5s; }
+        .mobile-menu.active li:nth-child(6) { transition-delay: 0.6s; }
+        .mobile-menu.active li:nth-child(7) { transition-delay: 0.7s; }
+        .mobile-menu.active li:nth-child(8) { transition-delay: 0.8s; }
+        .mobile-menu.active li:nth-child(9) { transition-delay: 0.9s; }
+
+        .mobile-menu a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.2rem;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 0.8rem;
+            border-radius: 12px;
+            transition: 0.3s;
+        }
+
+        .mobile-menu a i {
+            color: var(--vermelho-principal);
+            width: 30px;
+        }
+
+        .mobile-menu a:hover {
+            background: rgba(255, 0, 0, 0.1);
+            color: var(--vermelho-principal);
+            padding-left: 1.5rem;
+            transform: translateX(5px);
+        }
+
+        .mobile-menu .social-icons {
+            display: flex;
+            gap: 1.5rem;
+            margin-top: 3rem;
+            justify-content: center;
+        }
+
+        .mobile-menu .social-icons i {
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .mobile-menu .social-icons i:hover {
+            color: var(--vermelho-principal);
+            transform: translateY(-3px) scale(1.2);
+        }
+
+        /* Overlay */
+        .menu-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            backdrop-filter: blur(4px);
+            z-index: 998;
+            display: none;
+        }
+
+        .menu-overlay.active {
+            display: block;
+        }
+
+        /* HERO SECTION - TOPADA NO MENU (SEM PADDING/MARGEM) */
+        .hero {
+            position: relative;
+            width: 100%;
+            height: 90vh;
+            min-height: 700px;
+            overflow: hidden;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Vídeo Desktop */
+        .hero-video-desktop {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 0;
+            display: block;
+        }
+
+        /* Vídeo Mobile */
+        .hero-video-mobile {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 0;
+            display: none;
+        }
+
+        /* Overlay preto com opacidade */
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: 1;
+            animation: pulseOverlay 4s ease-in-out infinite;
+        }
+
+        @keyframes pulseOverlay {
+            0%, 100% { background: rgba(0, 0, 0, 0.6); }
+            50% { background: rgba(0, 0, 0, 0.5); }
+        }
+
+        /* Conteúdo do Hero - ATUALIZADO SEM LOGO */
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 1200px;
+            padding: 0 2rem;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            margin: 0 auto;
+            color: white;
+        }
+
+        /* NOVO TÍTULO PRINCIPAL */
+        .hero-title {
+            font-size: 4.5rem;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            animation: glowText 3s ease-in-out infinite;
+        }
+
+        @keyframes glowText {
+            0%, 100% { text-shadow: 0 0 20px rgba(255, 0, 0, 0.3); }
+            50% { text-shadow: 0 0 40px rgba(255, 0, 0, 0.6); }
+        }
+
+        .hero-title span {
+            color: var(--vermelho-principal);
+            display: block;
+            font-size: 5rem;
+        }
+
+        /* NOVO SUBTÍTULO */
+        .hero-subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            max-width: 800px;
+            color: rgba(255,255,255,0.9);
+            font-weight: 300;
+            animation: slideUp 1s ease-out;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-description {
+            font-size: 1.3rem;
+            max-width: 800px;
+            margin: 2rem auto 0;
+            line-height: 1.6;
+            color: rgba(255,255,255,0.9);
+        }
+
+        .hero-description strong {
+            color: var(--vermelho-principal);
+        }
+
+        .hero-buttons {
+            margin-top: 2.5rem;
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        /* MESMOS BOTÕES - AGORA VERMELHOS */
+        .btn {
+            background: var(--vermelho-principal);
+            color: white;
+            padding: 0.8rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: 0.3s;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            box-shadow: 0 8px 20px rgba(255, 0, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        .btn:hover {
+            background: var(--vermelho-escuro);
+            transform: scale(1.05) translateY(-2px);
+            box-shadow: 0 12px 30px rgba(255, 0, 0, 0.4);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--vermelho-principal);
+            color: var(--vermelho-principal);
+            box-shadow: none;
+        }
+
+        .btn-outline:hover {
+            background: var(--vermelho-principal);
+            color: white;
+        }
+
+        /* SEÇÕES - MANTIDAS IGUAL */
+        .section {
+            padding: 5rem 2rem;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 3rem;
+            text-align: center;
+        }
+
+        .section-title span {
+            color: var(--vermelho-principal);
+            display: block;
+            font-size: 1rem;
+            font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 0.5rem;
+        }
+
+        /* NOVA SEÇÃO - PROGRAMAS DO INSTITUTO (CARDS EXPANSÍVEIS) */
+        .programas-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .programa-card {
+            background: linear-gradient(145deg, #ffffff, #f8fafc);
+            border-radius: 30px;
+            overflow: hidden;
+            border: 1px solid #e2e8f0;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: pointer;
+            position: relative;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+        }
+
+        .programa-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--vermelho-principal);
+            box-shadow: 0 20px 40px rgba(255, 0, 0, 0.1);
+        }
+
+        .programa-header {
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .programa-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--vermelho-opaco);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-size: 2rem;
+            color: var(--vermelho-principal);
+        }
+
+        .programa-header h3 {
+            font-size: 1.8rem;
+            color: #1e293b;
+            margin-bottom: 1rem;
+        }
+
+        .programa-resumo {
+            color: #475569;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .programa-btn {
+            background: transparent;
+            border: 2px solid var(--vermelho-principal);
+            color: var(--vermelho-principal);
+            padding: 0.6rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .programa-btn:hover {
+            background: var(--vermelho-principal);
+            color: white;
+            transform: scale(1.05);
+        }
+
+        .programa-expansivel {
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+            transition: max-height 0.8s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.5s ease, padding 0.5s ease;
+            background: linear-gradient(135deg, #0a141e, #1a1f2a);
+            color: white;
+            padding: 0 2rem;
+        }
+
+        .programa-expansivel.expandido {
+            max-height: 800px;
+            opacity: 1;
+            padding: 2rem;
+        }
+
+        .programa-expansivel p {
+            line-height: 1.8;
+            margin-bottom: 1rem;
+            color: rgba(255,255,255,0.9);
+        }
+
+        .programa-expansivel strong {
+            color: var(--vermelho-principal);
+        }
+
+        .programa-expansivel ul {
+            list-style: none;
+            margin: 1rem 0;
+        }
+
+        .programa-expansivel li {
+            margin-bottom: 0.8rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .programa-expansivel li::before {
+            content: '•';
+            color: var(--vermelho-principal);
+            font-size: 1.5rem;
+            position: absolute;
+            left: 0;
+            top: -0.3rem;
+        }
+
+        /* NOVA SEÇÃO - VÍDEOS EM DESTAQUE (BEM CHAMATIVA) */
+        .videos-destaque {
+            background: linear-gradient(135deg, #0a0f1a 0%, #1a1f2e 100%);
+            padding: 5rem 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .videos-destaque::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 20% 50%, rgba(255, 0, 0, 0.1) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 80%, rgba(255, 0, 0, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+            animation: pulseGradient 5s ease-in-out infinite;
+        }
+
+        @keyframes pulseGradient {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
+        }
+
+        .videos-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .videos-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .videos-header h2 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            color: white;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+        }
+
+        .videos-header h2 span {
+            color: var(--vermelho-principal);
+            position: relative;
+            display: inline-block;
+        }
+
+        .videos-header h2 span::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--vermelho-principal);
+            border-radius: 2px;
+            box-shadow: 0 0 20px var(--vermelho-principal);
+            animation: expandLine 2s ease-in-out infinite;
+        }
+
+        @keyframes expandLine {
+            0%, 100% { transform: scaleX(1); opacity: 0.5; }
+            50% { transform: scaleX(1.2); opacity: 1; }
+        }
+
+        .videos-header p {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .videos-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+        }
+
+        .video-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 30px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 0, 0, 0.2);
+            backdrop-filter: blur(10px);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: pointer;
+            position: relative;
+        }
+
+        .video-card:hover {
+            transform: translateY(-15px) scale(1.02);
+            border-color: var(--vermelho-principal);
+            box-shadow: 0 30px 50px rgba(255, 0, 0, 0.3);
+        }
+
+        .video-thumbnail {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 16/9;
+            overflow: hidden;
+        }
+
+        .video-thumbnail img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .video-card:hover .video-thumbnail img {
+            transform: scale(1.1);
+        }
+
+        .video-play {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 60px;
+            height: 60px;
+            background: var(--vermelho-principal);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            opacity: 0;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 30px rgba(255, 0, 0, 0.5);
+        }
+
+        .video-card:hover .video-play {
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(1.1);
+        }
+
+        .video-info {
+            padding: 1.5rem;
+        }
+
+        .video-info h3 {
+            color: white;
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .video-info p {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .video-info p i {
+            color: var(--vermelho-principal);
+        }
+
+        .video-tag {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: var(--vermelho-principal);
+            color: white;
+            padding: 0.3rem 1rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            z-index: 2;
+            box-shadow: 0 5px 15px rgba(255, 0, 0, 0.3);
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        /* NOVA SEÇÃO - GAME DE PISTAS (CARROSSEL COM SETAS) - ATUALIZADO PARA MOBILE GAMIFICADO */
+        .pistas-game {
+            background: linear-gradient(135deg, #0a0f1a 0%, #1a1f2e 100%);
+            padding: 5rem 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .pistas-game::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" opacity="0.05"><path d="M10,50 Q30,30 50,50 T90,50" stroke="%23ff0000" fill="none" stroke-width="2"/><circle cx="20" cy="40" r="3" fill="%23ff0000"/><circle cx="40" cy="55" r="3" fill="%23ff0000"/><circle cx="60" cy="45" r="3" fill="%23ff0000"/><circle cx="80" cy="60" r="3" fill="%23ff0000"/></svg>') repeat;
+            pointer-events: none;
+            animation: moveMap 60s linear infinite;
+        }
+
+        @keyframes moveMap {
+            0% { background-position: 0 0; }
+            100% { background-position: 100% 100%; }
+        }
+
+        .pistas-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .pistas-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .pistas-header h2 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            color: white;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+        }
+
+        .pistas-header h2 span {
+            color: var(--vermelho-principal);
+            position: relative;
+            display: inline-block;
+        }
+
+        .pistas-header h2 span::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--vermelho-principal);
+            border-radius: 2px;
+            box-shadow: 0 0 20px var(--vermelho-principal);
+        }
+
+        .pistas-header p {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* CARROSSEL DE PISTAS - VERSÃO GAMIFICADA */
+        .pistas-carrossel {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        .pistas-wrapper {
+            overflow: hidden;
+            width: 100%;
+            border-radius: 40px;
+        }
+
+        .pistas-grid {
+            display: flex;
+            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .pista-card {
+            flex: 0 0 calc(33.333% - 1.33rem);
+            margin: 0 0.65rem;
+            background: linear-gradient(145deg, #1a1f2e, #0f1420);
+            border-radius: 30px;
+            overflow: hidden;
+            border: 2px solid transparent;
+            backdrop-filter: blur(10px);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: pointer;
+            position: relative;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .pista-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            border-color: var(--vermelho-principal);
+            box-shadow: 0 30px 50px rgba(255, 0, 0, 0.3);
+        }
+
+        .pista-card.selecionada {
+            border: 3px solid var(--vermelho-principal);
+            box-shadow: 0 0 30px rgba(255, 0, 0, 0.5);
+            transform: scale(1.02);
+            background: linear-gradient(145deg, #2a1f2e, #1f1420);
+        }
+
+        .pista-imagem {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 16/9;
+            overflow: hidden;
+        }
+
+        .pista-imagem img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .pista-card:hover .pista-imagem img {
+            transform: scale(1.1);
+        }
+
+        .pista-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: 0.3s;
+        }
+
+        .pista-card:hover .pista-overlay {
+            opacity: 1;
+        }
+
+        .pista-overlay i {
+            color: white;
+            font-size: 3rem;
+            text-shadow: 0 0 20px rgba(255, 0, 0, 0.5);
+        }
+
+        .pista-info {
+            padding: 1.5rem;
+        }
+
+        .pista-info h3 {
+            color: white;
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+            text-shadow: 0 2px 10px rgba(255, 0, 0, 0.3);
+        }
+
+        .pista-local {
+            color: var(--vermelho-principal);
+            font-size: 1rem;
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .pista-local i {
+            font-size: 0.9rem;
+        }
+
+        .pista-detalhes {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin: 1rem 0;
+            color: rgba(255,255,255,0.7);
+            font-size: 0.9rem;
+        }
+
+        .pista-detalhes span {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            background: rgba(255, 0, 0, 0.1);
+            padding: 0.3rem 0.8rem;
+            border-radius: 50px;
+            border: 1px solid rgba(255, 0, 0, 0.2);
+        }
+
+        .pista-detalhes i {
+            color: var(--vermelho-principal);
+        }
+
+        .pista-badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: linear-gradient(135deg, var(--vermelho-principal), var(--vermelho-escuro));
+            color: white;
+            padding: 0.3rem 1rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            z-index: 2;
+            box-shadow: 0 5px 15px rgba(255, 0, 0, 0.3);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .pista-select-btn {
+            background: transparent;
+            border: 2px solid var(--vermelho-principal);
+            color: var(--vermelho-principal);
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: 0.3s;
+            margin-top: 0.5rem;
+            width: 100%;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .pista-select-btn:hover {
+            background: var(--vermelho-principal);
+            color: white;
+            transform: scale(1.05);
+            box-shadow: 0 5px 20px rgba(255, 0, 0, 0.3);
+        }
+
+        .pista-card.selecionada .pista-select-btn {
+            background: var(--vermelho-principal);
+            color: white;
+        }
+
+        /* SETAS DO CARROSSEL */
+        .carrossel-arrow {
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 0, 0, 0.2);
+            border: 2px solid var(--vermelho-principal);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--vermelho-principal);
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 10;
+            flex-shrink: 0;
+            backdrop-filter: blur(5px);
+        }
+
+        .carrossel-arrow:hover {
+            background: var(--vermelho-principal);
+            color: white;
+            transform: scale(1.1);
+            box-shadow: 0 0 30px rgba(255, 0, 0, 0.5);
+        }
+
+        .carrossel-arrow:active {
+            transform: scale(0.95);
+        }
+
+        .carrossel-arrow.disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+            pointer-events: none;
+        }
+
+        /* NOVA SEÇÃO - AUTOMOBILISMO SUSTENTÁVEL - ATUALIZADA COM EFEITO LÍQUIDO */
+        .sustentavel-section {
+            background: linear-gradient(135deg, #0a141e 0%, #1a1f2a 100%);
+            padding: 4rem 2rem;
+            margin: 2rem auto;
+            max-width: 1200px;
+            border-radius: 30px;
+            position: relative;
+            overflow: hidden;
+            color: white;
+            border: 1px solid rgba(255, 0, 0, 0.2);
+        }
+
+        .sustentavel-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 0, 0, 0.05) 0%, transparent 50%);
+            animation: rotate 30s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .sustentavel-content {
+            position: relative;
+            z-index: 1;
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .sustentavel-content h2 {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            color: white;
+            text-transform: uppercase;
+        }
+
+        .sustentavel-content h2 span {
+            color: var(--vermelho-principal);
+        }
+
+        .sustentavel-content p {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            color: rgba(255,255,255,0.9);
+            max-width: 800px;
+            margin: 0 auto 2rem;
+        }
+
+        .sustentavel-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: transparent;
+            border: 2px solid var(--vermelho-principal);
+            color: var(--vermelho-principal);
+            padding: 0.8rem 2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: 0.3s;
+            text-decoration: none;
+        }
+
+        .sustentavel-btn:hover {
+            background: var(--vermelho-principal);
+            color: white;
+            transform: scale(1.05);
+            box-shadow: 0 8px 20px rgba(255, 0, 0, 0.3);
+        }
+
+        /* EFEITO LÍQUIDO ORGÂNICO PARA EXPANSÃO - CORRIGIDO PARA NÃO CORTAR CONTEÚDO */
+        .historia-expansivel {
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+            transition: max-height 1.5s cubic-bezier(0.77, 0, 0.175, 1), opacity 0.8s ease, margin 0.8s ease;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 30px;
+            margin: 0;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 0, 0, 0.1);
+            position: relative;
+            z-index: 2;
+            transform-origin: top center;
+        }
+
+        .historia-expansivel.expandido {
+            max-height: 4000px; /* Valor grande o suficiente para todo conteúdo */
+            opacity: 1;
+            margin: 2rem 0 0 0;
+            padding: 2rem;
+        }
+
+        /* Efeito de onda líquida apenas quando expandido - SEM HOVER */
+        .historia-expansivel.expandido {
+            animation: ondaLiquida 3s ease-in-out infinite;
+        }
+
+        @keyframes ondaLiquida {
+            0%, 100% { 
+                box-shadow: 0 -5px 20px rgba(255, 0, 0, 0.2);
+                border-top-color: rgba(255, 0, 0, 0.3);
+            }
+            50% { 
+                box-shadow: 0 -15px 30px rgba(255, 0, 0, 0.4);
+                border-top-color: rgba(255, 0, 0, 0.6);
+            }
+        }
+
+        .historia-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            color: white;
+        }
+
+        .historia-texto {
+            padding: 1rem;
+        }
+
+        .historia-texto h3 {
+            color: var(--vermelho-principal);
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            border-bottom: 2px solid rgba(255, 0, 0, 0.3);
+            padding-bottom: 0.5rem;
+        }
+
+        .historia-texto h4 {
+            color: var(--vermelho-claro);
+            font-size: 1.3rem;
+            margin: 1.5rem 0 1rem;
+        }
+
+        .historia-texto p {
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .historia-texto ul {
+            list-style: none;
+            margin: 1rem 0;
+        }
+
+        .historia-texto li {
+            margin-bottom: 0.8rem;
+            padding-left: 1.5rem;
+            position: relative;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .historia-texto li::before {
+            content: '•';
+            color: var(--vermelho-principal);
+            font-size: 1.5rem;
+            position: absolute;
+            left: 0;
+            top: -0.3rem;
+        }
+
+        .historia-imagens {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            padding: 1rem;
+        }
+
+        .historia-img-item {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            overflow: hidden;
+            aspect-ratio: 4/3;
+            border: 1px solid rgba(255, 0, 0, 0.2);
+            transition: 0.3s;
+        }
+
+        .historia-img-item:hover {
+            transform: scale(1.02);
+            border-color: var(--vermelho-principal);
+            box-shadow: 0 10px 30px rgba(255, 0, 0, 0.3);
+        }
+
+        .historia-img-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .img-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #2a3a4a, #1a2a3a);
+            color: white;
+            font-size: 3rem;
+            text-align: center;
+            padding: 1rem;
+        }
+
+        .img-caption {
+            background: rgba(0,0,0,0.7);
+            color: white;
+            padding: 0.5rem;
+            font-size: 0.8rem;
+            text-align: center;
+        }
+
+        /* ABOUT GRID - ATUALIZADO COM IMAGEM 01.png */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .about-text h2 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: #1e293b;
+        }
+
+        .about-text p {
+            color: #475569;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+
+        .about-image {
+            background: transparent;
+            border-radius: 30px;
+            padding: 0;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .about-image img {
+            width: 100%;
+            height: auto;
+            max-width: 500px;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(255, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .about-image img:hover {
+            transform: scale(1.02);
+        }
+
+        /* SPECS GRID - MODIFICADO PARA INCLUIR A IMAGEM DO CARRO */
+        .specs-section {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* NOVA IMAGEM DO CARRO - SEM FUNDO, APENAS PNG */
+        .carro-image-container {
+            width: 100%;
+            margin: 2rem auto 4rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .carro-image {
+            position: relative;
+            z-index: 1;
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .carro-image img {
+            width: 100%;
+            height: auto;
+            transition: all 0.3s ease;
+            display: block;
+        }
+
+        .carro-image img:hover {
+            transform: scale(1.02);
+            filter: drop-shadow(0 30px 40px rgba(0, 0, 0, 0));
+        }
+
+        .carro-caption {
+            margin-top: 1rem;
+            color: var(--vermelho-principal);
+            font-size: 1.1rem;
+            font-weight: 500;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .carro-caption i {
+            color: var(--vermelho-principal);
+            margin: 0 0.5rem;
+            font-size: 0.8rem;
+        }
+
+        .specs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .spec-card {
+            background: white;
+            border-radius: 24px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            border: 1px solid #e2e8f0;
+            transition: 0.3s;
+        }
+
+        .spec-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(255, 0, 0, 0.1);
+            border-color: var(--vermelho-principal);
+        }
+
+        .spec-card h3 {
+            color: var(--vermelho-principal);
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .spec-list {
+            list-style: none;
+        }
+
+        .spec-list li {
+            padding: 0.8rem 0;
+            border-bottom: 1px solid #e2e8f0;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #475569;
+        }
+
+        .spec-list li i {
+            color: var(--vermelho-principal);
+            width: 20px;
+        }
+
+        .spec-list li strong {
+            color: #1e293b;
+            width: 120px;
+        }
+
+        /* NOVA SEÇÃO: ETANOL E CARBONO ZERO - ESTILO CENTRALIZADO */
+        .etanol-section {
+            background: linear-gradient(135deg, #0a141e 0%, #1a1f2a 100%);
+            padding: 4rem 2rem;
+            margin: 2rem auto;
+            max-width: 1200px;
+            border-radius: 30px;
+            position: relative;
+            overflow: hidden;
+            color: white;
+            border: 1px solid rgba(255, 0, 0, 0.2);
+        }
+
+        .etanol-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 0, 0, 0.05) 0%, transparent 50%);
+            animation: rotate 30s linear infinite;
+        }
+
+        .etanol-content {
+            position: relative;
+            z-index: 1;
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .etanol-title-large {
+            font-size: 2.8rem;
+            margin-bottom: 2rem;
+        }
+
+        .etanol-title-large span {
+            color: var(--vermelho-principal);
+        }
+
+        .etanol-texto-completo {
+            text-align: left;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 1rem;
+        }
+
+        .etanol-texto-completo h3 {
+            color: var(--vermelho-principal);
+            font-size: 1.8rem;
+            margin: 2rem 0 1rem;
+            border-bottom: 2px solid rgba(255, 0, 0, 0.3);
+            padding-bottom: 0.5rem;
+            text-align: center;
+        }
+
+        .etanol-texto-completo h4 {
+            color: var(--vermelho-claro);
+            font-size: 1.3rem;
+            margin: 1.5rem 0 1rem;
+        }
+
+        .etanol-texto-completo p {
+            line-height: 1.8;
+            margin-bottom: 1.2rem;
+            color: rgba(255,255,255,0.9);
+        }
+
+        .etanol-texto-completo strong {
+            color: var(--vermelho-principal);
+        }
+
+        .etanol-texto-completo ul {
+            list-style: none;
+            margin: 1rem 0;
+        }
+
+        .etanol-texto-completo li {
+            margin-bottom: 0.8rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .etanol-texto-completo li::before {
+            content: '•';
+            color: var(--vermelho-principal);
+            font-size: 1.5rem;
+            position: absolute;
+            left: 0;
+            top: -0.3rem;
+        }
+
+        .etanol-destaque-box {
+            background: rgba(255,0,0,0.1);
+            padding: 1.5rem;
+            border-radius: 20px;
+            margin: 2rem 0;
+        }
+
+        /* NOVA SEÇÃO: ICO LASTREADO EM CBIO - ESTILO CENTRALIZADO */
+        .ico-section {
+            padding: 5rem 2rem;
+        }
+
+        .ico-title-large {
+            font-size: 2.8rem;
+            margin-bottom: 2rem;
+        }
+
+        .ico-title-large span {
+            color: var(--vermelho-principal);
+        }
+
+        .ico-texto-completo {
+            text-align: left;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 1rem;
+        }
+
+        .ico-texto-completo h3 {
+            color: var(--vermelho-principal);
+            font-size: 1.8rem;
+            margin: 2rem 0 1rem;
+            border-bottom: 2px solid rgba(255, 0, 0, 0.3);
+            padding-bottom: 0.5rem;
+            text-align: center;
+        }
+
+        .ico-texto-completo h4 {
+            color: var(--vermelho-claro);
+            font-size: 1.3rem;
+            margin: 1.5rem 0 1rem;
+        }
+
+        .ico-texto-completo p {
+            line-height: 1.8;
+            margin-bottom: 1.2rem;
+            color: rgba(255,255,255,0.9);
+        }
+
+        .ico-texto-completo strong {
+            color: var(--vermelho-principal);
+        }
+
+        .ico-texto-completo ul {
+            list-style: none;
+            margin: 1rem 0;
+        }
+
+        .ico-texto-completo li {
+            margin-bottom: 0.8rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .ico-texto-completo li::before {
+            content: '•';
+            color: var(--vermelho-principal);
+            font-size: 1.5rem;
+            position: absolute;
+            left: 0;
+            top: -0.3rem;
+        }
+
+        .ico-destaque-box {
+            background: rgba(255,0,0,0.1);
+            padding: 1.5rem;
+            border-radius: 20px;
+            margin: 2rem 0;
+        }
+
+        .ico-opinion-box {
+            background: rgba(0,0,0,0.3);
+            padding: 1.5rem;
+            border-radius: 20px;
+            margin: 2rem 0;
+        }
+
+        .ico-timeline {
+            margin: 1.5rem 0;
+        }
+
+        .ico-timeline-item {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            align-items: flex-start;
+        }
+
+        .ico-timeline-number {
+            background: var(--vermelho-principal);
+            min-width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        .ico-timeline-content h5 {
+            color: var(--vermelho-principal);
+            margin-bottom: 0.3rem;
+            font-size: 1.1rem;
+        }
+
+        .ico-checklist {
+            list-style: none;
+            margin: 1rem 0;
+        }
+
+        .ico-checklist li {
+            margin-bottom: 0.5rem;
+        }
+
+        .ico-checklist i {
+            color: var(--vermelho-principal);
+            margin-right: 0.5rem;
+        }
+
+        /* ECOSYSTEM GRID - IGUAL */
+        .ecosystem-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .eco-card {
+            background: white;
+            border-radius: 24px;
+            padding: 2rem;
+            text-align: center;
+            border: 1px solid #e2e8f0;
+            transition: 0.3s;
+        }
+
+        .eco-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--vermelho-principal);
+            box-shadow: 0 20px 40px rgba(255, 0, 0, 0.1);
+        }
+
+        .eco-icon {
+            width: 80px;
+            height: 80px;
+            background: rgba(255, 0, 0, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-size: 2rem;
+            color: var(--vermelho-principal);
+        }
+
+        .eco-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: #1e293b;
+        }
+
+        .eco-card p {
+            color: #64748b;
+            line-height: 1.6;
+        }
+
+        /* COPA SECTION - IGUAL */
+        .copa-section {
+            background: linear-gradient(135deg, #0a141e, #1a2a3a);
+            color: white;
+            border-radius: 30px;
+            padding: 4rem;
+            margin: 2rem auto;
+            max-width: 1200px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .copa-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 0, 0, 0.1) 0%, transparent 50%);
+            animation: rotate 20s linear infinite;
+        }
+
+        .copa-content {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .copa-content h2 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--vermelho-principal), var(--vermelho-escuro));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .copa-stats {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin: 3rem 0;
+        }
+
+        .copa-stat .number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--vermelho-principal);
+        }
+
+        /* CONTATO - IGUAL */
+        .contact-info {
+            text-align: center;
+            margin: 2rem 0;
+        }
+
+        .contact-info i {
+            color: var(--vermelho-principal);
+            font-size: 1.2rem;
+            margin-right: 0.5rem;
+        }
+
+        .contact-info a {
+            color: #1e293b;
+            text-decoration: none;
+            font-size: 1.2rem;
+            margin: 0 1rem;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .social-links a {
+            color: #1e293b;
+            font-size: 2rem;
+            transition: 0.3s;
+        }
+
+        .social-links a:hover {
+            color: var(--vermelho-principal);
+            transform: translateY(-3px) scale(1.1);
+        }
+
+        /* FOOTER - IGUAL */
+        .footer {
+            background: #0a141e;
+            color: white;
+            padding: 4rem 2rem 2rem;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+        }
+
+        .footer-section h4 {
+            color: var(--vermelho-principal);
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+
+        .footer-section p {
+            color: #94a3b8;
+            line-height: 1.6;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-section a {
+            color: #94a3b8;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .footer-section a:hover {
+            color: var(--vermelho-principal);
+            padding-left: 5px;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 3rem;
+            margin-top: 3rem;
+            border-top: 1px solid #1e293b;
+            color: #94a3b8;
+        }
+
+        /* FORMULÁRIO DE INSCRIÇÃO - MODAL */
+        .form-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            z-index: 2000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .form-modal.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .form-container {
+            background: linear-gradient(135deg, #0a141e, #1a1f2a);
+            max-width: 600px;
+            width: 90%;
+            border-radius: 40px;
+            padding: 3rem;
+            position: relative;
+            border: 1px solid rgba(255, 0, 0, 0.3);
+            box-shadow: 0 30px 60px rgba(255, 0, 0, 0.3);
+            transform: scale(0.9);
+            transition: transform 0.3s ease;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .form-modal.active .form-container {
+            transform: scale(1);
+        }
+
+        .form-container::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .form-container::-webkit-scrollbar-track {
+            background: rgba(255,255,255,0.05);
+            border-radius: 10px;
+        }
+
+        .form-container::-webkit-scrollbar-thumb {
+            background: var(--vermelho-principal);
+            border-radius: 10px;
+        }
+
+        .form-close {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 0, 0, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: 0.3s;
+            border: 1px solid rgba(255, 0, 0, 0.3);
+        }
+
+        .form-close:hover {
+            background: var(--vermelho-principal);
+            transform: rotate(90deg);
+        }
+
+        .form-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .form-header h2 {
+            color: white;
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .form-header h2 span {
+            color: var(--vermelho-principal);
+        }
+
+        .form-header p {
+            color: rgba(255,255,255,0.7);
+            font-size: 1rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .form-label {
+            display: block;
+            color: white;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+
+        .form-label i {
+            color: var(--vermelho-principal);
+            margin-right: 0.5rem;
+        }
+
+        .form-input,
+        .form-select,
+        .form-textarea {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255, 0, 0, 0.2);
+            border-radius: 15px;
+            color: white;
+            font-size: 1rem;
+            transition: 0.3s;
+        }
+
+        .form-input:focus,
+        .form-select:focus,
+        .form-textarea:focus {
+            outline: none;
+            border-color: var(--vermelho-principal);
+            box-shadow: 0 0 20px rgba(255, 0, 0, 0.3);
+            background: rgba(255,255,255,0.1);
+        }
+
+        .form-input::placeholder,
+        .form-textarea::placeholder {
+            color: rgba(255,255,255,0.3);
+        }
+
+        .form-select option {
+            background: #1a1f2a;
+            color: white;
+        }
+
+        .form-textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .form-checkbox {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: rgba(255,255,255,0.7);
+            font-size: 0.9rem;
+            margin: 1rem 0;
+        }
+
+        .form-checkbox input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            accent-color: var(--vermelho-principal);
+        }
+
+        .form-checkbox a {
+            color: var(--vermelho-principal);
+            text-decoration: none;
+        }
+
+        .form-checkbox a:hover {
+            text-decoration: underline;
+        }
+
+        .form-submit {
+            width: 100%;
+            padding: 1rem;
+            background: var(--vermelho-principal);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-top: 2rem;
+        }
+
+        .form-submit:hover {
+            background: var(--vermelho-escuro);
+            transform: scale(1.02);
+            box-shadow: 0 10px 30px rgba(255, 0, 0, 0.4);
+        }
+
+        .form-submit i {
+            font-size: 1.2rem;
+        }
+
+        /* RESPONSIVO - AJUSTADO PARA O NOVO LAYOUT GAMIFICADO */
+        @media (max-width: 1200px) {
+            .videos-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .pista-card {
+                flex: 0 0 calc(50% - 1rem);
+            }
+            
+            .programas-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-video-desktop {
+                display: none;
+            }
+
+            .hero-video-mobile {
+                display: block;
+            }
+
+            .hero-title {
+                font-size: 2.5rem;
+            }
+
+            .hero-title span {
+                font-size: 3rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.2rem;
+            }
+
+            .hero-description {
+                font-size: 1.1rem;
+                padding: 1rem;
+            }
+            
+            .about-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .copa-section {
+                padding: 3rem 1.5rem;
+            }
+
+            .copa-stats {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+
+            .sustentavel-content h2 {
+                font-size: 2rem;
+            }
+
+            .sustentavel-content p {
+                font-size: 1rem;
+            }
+
+            .videos-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .videos-header h2,
+            .pistas-header h2 {
+                font-size: 2.5rem;
+            }
+
+            /* AJUSTE CRÍTICO - MOSTRAR APENAS 1 PISTA POR VEZ NO MOBILE */
+            .pista-card {
+                flex: 0 0 calc(100% - 0rem);
+                margin: 0;
+                border-radius: 20px;
+            }
+
+            .pistas-carrossel {
+                gap: 0.5rem;
+            }
+
+            .pistas-wrapper {
+                border-radius: 20px;
+            }
+
+            /* Garantir que não haja margens que causem espaçamento */
+            .pistas-grid {
+                gap: 0;
+            }
+
+            .pista-info {
+                padding: 1.2rem;
+            }
+
+            .pista-info h3 {
+                font-size: 1.3rem;
+            }
+
+            .pista-detalhes {
+                gap: 0.5rem;
+                flex-wrap: wrap;
+            }
+
+            .pista-detalhes span {
+                padding: 0.2rem 0.5rem;
+                font-size: 0.8rem;
+            }
+
+            .pista-select-btn {
+                padding: 0.4rem 1rem;
+                font-size: 0.8rem;
+            }
+
+            .carrossel-arrow {
+                width: 40px;
+                height: 40px;
+                font-size: 1.2rem;
+                flex-shrink: 0;
+            }
+
+            .form-container {
+                padding: 2rem;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .form-header h2 {
+                font-size: 2rem;
+            }
+
+            /* AJUSTE DO LOGO NO MOBILE */
+            .logo-container {
+                height: 27px;
+            }
+            
+            .header.scrolled .logo-container {
+                height: 35px;
+            }
+
+            /* AJUSTES MOBILE PARA BARRA DE COTAÇÕES */
+            .quotes-bar {
+                padding: 0.3rem 0.5rem;
+                justify-content: flex-start;
+                overflow: hidden;
+            }
+
+            .quotes-container {
+                display: flex;
+                flex-wrap: nowrap;
+                gap: 1.2rem;
+                width: fit-content;
+                animation: scrollQuotesMobile 18s linear infinite;
+                white-space: nowrap;
+                justify-content: flex-start;
+            }
+
+            .quote-item {
+                display: inline-flex;
+                flex-shrink: 0;
+            }
+
+            @keyframes scrollQuotesMobile {
+                0% { transform: translateX(0); }
+                100% { transform: translateX(-50%); }
+            }
+
+            /* AJUSTE DA IMAGEM DO CARRO NO MOBILE */
+            .carro-image-container {
+                margin: 1rem auto 2rem;
+            }
+            
+            .carro-image img {
+                border-radius: 0;
+            }
+            
+            .carro-caption {
+                font-size: 0.9rem;
+            }
+            
+            .etanol-title-large,
+            .ico-title-large {
+                font-size: 2rem;
+            }
+            
+            .ico-timeline-item {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+            
+            .programas-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            
+            .programa-expansivel.expandido {
+                max-height: 800px;
+            }
+            
+            .historia-expansivel.expandido {
+                max-height: 4000px;
+            }
+        }
+
+        /* AJUSTES PARA TABLET E DESKTOP */
+        @media (min-width: 769px) {
+            .quotes-container {
+                gap: 2rem;
+                flex-wrap: wrap;
+                animation: none;
+            }
+        }
+
+
+
+
+
+        /* ANIMAÇÃO PARA O NOME DO DEV */
+.credito-dev {
+    color: var(--vermelho-principal);
+    font-weight: 700;
+    text-decoration: none;
+    position: relative;
+    display: inline-block;
+    animation: pulseDev 1.5s ease-in-out infinite;
+    text-shadow: 0 0 10px rgba(255, 0, 0, 0.3);
+}
+
+.credito-dev:hover {
+    animation: none;
+    transform: scale(1.1);
+    text-shadow: 0 0 20px rgba(255, 0, 0, 0.8);
+    transition: all 0.3s ease;
+}
+
+@keyframes pulseDev {
+    0% {
+        transform: scale(1);
+        text-shadow: 0 0 10px rgba(255, 0, 0, 0.3);
+    }
+    50% {
+        transform: scale(1.1);
+        text-shadow: 0 0 20px rgba(255, 0, 0, 0.8), 0 0 30px rgba(255, 0, 0, 0.5);
+    }
+    100% {
+        transform: scale(1);
+        text-shadow: 0 0 10px rgba(255, 0, 0, 0.3);
+    }
+}
+
+/* Ícone de destaque opcional */
+.credito-dev i {
+    font-size: 0.8rem;
+    margin-left: 4px;
+    opacity: 0.8;
+}
+    </style>
+</head>
+<body>
+    <!-- TOP BAR 1 - BRANCA COM TEXTO ROLANTE -->
+    <div class="top-bar">
+        <div class="scrolling-text">
+            <span>
+                <i class="fas fa-circle"></i> ECOSSISTEMA FÓRMULA INTER <i class="fas fa-flag-checkered"></i> REALIZANDO SONHOS NO AUTOMOBILISMO
+                <i class="fas fa-circle"></i> ECOSSISTEMA FÓRMULA INTER <i class="fas fa-flag-checkered"></i> REALIZANDO SONHOS NO AUTOMOBILISMO
+            </span>
+            <span>
+                <i class="fas fa-circle"></i> ECOSSISTEMA FÓRMULA INTER <i class="fas fa-flag-checkered"></i> REALIZANDO SONHOS NO AUTOMOBILISMO
+                <i class="fas fa-circle"></i> ECOSSISTEMA FÓRMULA INTER <i class="fas fa-flag-checkered"></i> REALIZANDO SONHOS NO AUTOMOBILISMO
+            </span>
+        </div>
+    </div>
+
+    <!-- Glass Header - AGORA COM ÍCONES DO LADO DO HAMBURGUER -->
+    <header class="header" id="header">
+        <!-- Espaço para seu logo SVG -->
+        <div class="logo-container">
+            <img src="logo.svg" alt="Instituto Mete Marcha" style="height: 100%; width: auto;">
+        </div>
+        
+        <!-- Container com ícones e hamburguer juntos -->
+        <div class="right-side">
+            <div class="header-icons">
+                <i class="fas fa-search"></i>
+                <i class="fas fa-user"></i>
+            </div>
+
+            <!-- Hamburger Icon - VISÍVEL EM TODAS AS TELAS -->
+            <div class="hamburger" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </header>
+
+    <!-- TOP BAR 2 - VERMELHA COM COTAÇÕES - APENAS LINHA FINA -->
+    <div class="quotes-bar">
+        <div class="quotes-container">
+            <div class="quote-item">
+                <i class="fas fa-leaf"></i>
+                <span class="quote-value">CBIO: R$ 33,00</span>
+                <span class="quote-change quote-up"><i class="fas fa-arrow-up"></i> 1,2%</span>
+            </div>
+            <div class="quote-item">
+                <i class="fas fa-dollar-sign"></i>
+                <span class="quote-value">DÓLAR: R$ 5,87</span>
+                <span class="quote-change quote-down"><i class="fas fa-arrow-down"></i> 0,5%</span>
+            </div>
+            <div class="quote-item">
+                <i class="fas fa-euro-sign"></i>
+                <span class="quote-value">EURO: R$ 6,23</span>
+                <span class="quote-change quote-up"><i class="fas fa-arrow-up"></i> 0,8%</span>
+            </div>
+            <div class="quote-item">
+                <i class="fab fa-bitcoin"></i>
+                <span class="quote-value">BTC: R$ 487.532</span>
+                <span class="quote-change quote-up"><i class="fas fa-arrow-up"></i> 3,2%</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile/Desktop Menu - AGORA FUNCIONA PARA TODAS AS TELAS -->
+    <div class="mobile-menu" id="mobileMenu">
+        <ul>
+            <li><a href="#home" onclick="toggleMenu()"><i class="fas fa-home"></i> Home</a></li>
+            <li><a href="#sobre" onclick="toggleMenu()"><i class="fas fa-flag-checkered"></i> A Categoria</a></li>
+            <li><a href="#programas" onclick="toggleMenu()"><i class="fas fa-calendar-alt"></i> Programas</a></li>
+            <li><a href="#videos" onclick="toggleMenu()"><i class="fas fa-video"></i> Vídeos</a></li>
+            <li><a href="#pistas" onclick="toggleMenu()"><i class="fas fa-map-marked-alt"></i> Pistas</a></li>
+            <li><a href="#especificacoes" onclick="toggleMenu()"><i class="fas fa-car"></i> O Carro</a></li>
+            <li><a href="#sustentavel" onclick="toggleMenu()"><i class="fas fa-leaf"></i> Sustentável</a></li>
+            <li><a href="#etanol-carbono" onclick="toggleMenu()"><i class="fas fa-gas-pump"></i> Etanol</a></li>
+            <li><a href="#ecossistema" onclick="toggleMenu()"><i class="fas fa-tree"></i> Ecossistema</a></li>
+            <li><a href="#copa" onclick="toggleMenu()"><i class="fas fa-trophy"></i> Copa</a></li>
+            <li><a href="#ico-cbio" onclick="toggleMenu()"><i class="fas fa-coins"></i> ICO CBIO</a></li>
+            <li><a href="#contato" onclick="toggleMenu()"><i class="fas fa-envelope"></i> Contato</a></li>
+        </ul>
+        
+        <div class="social-icons">
+            <i class="fab fa-instagram"></i>
+            <i class="fab fa-tiktok"></i>
+            <i class="fab fa-youtube"></i>
+            <i class="fab fa-facebook"></i>
+        </div>
+    </div>
+
+    <!-- Overlay -->
+    <div class="menu-overlay" id="overlay" onclick="toggleMenu()"></div>
+
+    <!-- FORMULÁRIO DE INSCRIÇÃO MODAL -->
+    <div class="form-modal" id="formModal">
+        <div class="form-container">
+            <div class="form-close" onclick="toggleForm()">
+                <i class="fas fa-times"></i>
+            </div>
+            
+            <div class="form-header">
+                <h2>INSCRIÇÃO <span>COPA</span></h2>
+                <p>Preencha seus dados para participar da Copa Fórmula Inter</p>
+            </div>
+
+            <form id="inscricaoForm" onsubmit="enviarFormulario(event)">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label"><i class="fas fa-user"></i> Nome*</label>
+                        <input type="text" class="form-input" placeholder="Seu nome completo" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label"><i class="fas fa-id-card"></i> CPF*</label>
+                        <input type="text" class="form-input" placeholder="000.000.000-00" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label"><i class="fas fa-envelope"></i> E-mail*</label>
+                        <input type="email" class="form-input" placeholder="seu@email.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label"><i class="fas fa-phone"></i> Telefone*</label>
+                        <input type="tel" class="form-input" placeholder="(11) 99999-9999" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label"><i class="fas fa-calendar"></i> Data de Nascimento*</label>
+                        <input type="date" class="form-input" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label"><i class="fas fa-flag"></i> Nacionalidade*</label>
+                        <select class="form-select" required>
+                            <option value="">Selecione</option>
+                            <option value="brasileiro">Brasileiro</option>
+                            <option value="outro">Outro</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label"><i class="fas fa-map-marker-alt"></i> Endereço Completo*</label>
+                    <input type="text" class="form-input" placeholder="Rua, número, bairro, cidade - UF" required>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label"><i class="fas fa-trophy"></i> Categoria*</label>
+                        <select class="form-select" required>
+                            <option value="">Selecione</option>
+                            <option value="piloto">Piloto</option>
+                            <option value="mecanico">Mecânico</option>
+                            <option value="engenheiro">Engenheiro</option>
+                            <option value="outro">Outro</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label"><i class="fas fa-car"></i> Experiência*</label>
+                        <select class="form-select" required>
+                            <option value="">Selecione</option>
+                            <option value="iniciante">Iniciante</option>
+                            <option value="intermediario">Intermediário</option>
+                            <option value="avancado">Avançado</option>
+                            <option value="profissional">Profissional</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label"><i class="fas fa-notes-medical"></i> Observações Médicas</label>
+                    <textarea class="form-textarea" placeholder="Alguma condição médica que devamos saber? (opcional)"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label"><i class="fas fa-file-signature"></i> Documentos</label>
+                    <input type="file" class="form-input" accept=".pdf,.jpg,.png" multiple>
+                    <small style="color: rgba(255,255,255,0.5);">Anexe RG, CNH ou comprovante (opcional)</small>
+                </div>
+
+                <div class="form-checkbox">
+                    <input type="checkbox" id="termos" required>
+                    <label for="termos">Li e aceito os <a href="#">termos e condições</a> da Copa Fórmula Inter*</label>
+                </div>
+
+                <div class="form-checkbox">
+                    <input type="checkbox" id="comunicacoes">
+                    <label for="comunicacoes">Aceito receber comunicações sobre a Fórmula Inter</label>
+                </div>
+
+                <button type="submit" class="form-submit">
+                    <i class="fas fa-check-circle"></i> CADASTRAR INSCRIÇÃO
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- HERO SECTION - ATUALIZADO SEM LOGO -->
+    <section class="hero" id="home">
+        <!-- Vídeo Desktop -->
+        <video class="hero-video-desktop" autoplay muted loop playsinline>
+            <source src="01.mp4" type="video/mp4">
+        </video>
+
+        <!-- Vídeo Mobile (diferente) -->
+        <video class="hero-video-mobile" autoplay muted loop playsinline>
+            <source src="01.mp4" type="video/mp4">
+        </video>
+        
+        <!-- Overlay preto -->
+        <div class="hero-overlay"></div>
+        
+        <!-- Conteúdo - SEM LOGO -->
+        <div class="hero-content">
+            <!-- NOVO TÍTULO E SUBTÍTULO -->
+            <h1 class="hero-title">
+                mete marcha <span>racing Academy</span>
+            </h1>
+            
+            <h2 class="hero-subtitle">
+                Escola de Pilotos em parceria com a Fórmula Inter
+            </h2>
+
+            <div class="hero-description">
+                <strong>+ de 100 pilotos formados</strong> | 8 anos de história | A maior escola de monopostos do Brasil
+            </div>
+
+            <div class="hero-buttons">
+                <a href="javascript:void(0)" class="btn" onclick="toggleForm()"><i class="fas fa-trophy"></i> Participe da Copa</a>
+                <a href="#sobre" class="btn btn-outline"><i class="fas fa-info-circle"></i> Conheça</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- SEÇÃO SOBRE A CATEGORIA -->
+    <section class="section" id="sobre">
+        <div class="section-title">
+            <span>DESDE 2015</span>
+            A CATEGORIA
+        </div>
+        
+        <div class="about-grid">
+            <div class="about-text reveal-left">
+                <h2>Realizando sonhos no automobilismo</h2>
+                <p>A Fórmula Inter foi idealizada e criada em 2015, com a missão de gerar novas oportunidades e tornar em realidade o sonho daqueles que buscam viver o automobilismo na sua verdadeira essência.</p>
+                <p>Hoje a Categoria Fórmula Inter oferece um caminho de aprendizado e desenvolvimento dos pilotos que estão em busca das principais categorias profissionais do mundo.</p>
+                <p>Temos um design de carro exclusivo, que visa a segurança e inovação, alinhados a muita tecnologia.</p>
+            </div>
+            <div class="about-image reveal-right">
+                <!-- IMAGEM 01.png NO LUGAR DO ÍCONE -->
+                <img src="01.png" alt="Fórmula Inter" onerror="this.onerror=null; this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNTAwIiBoZWlnaHQ9IjMwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjMmQzNzQ4Ii8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtc2l6ZT0iMjAiIGZpbGw9IndoaXRlIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkeT0iLjNlbSI+Rm9ybXVsYSBJbnRlcjwvdGV4dD48L3N2Zz4=';">
+            </div>
+        </div>
+    </section>
+
+    <!-- NOVA SEÇÃO: PROGRAMAS DO INSTITUTO METE MARCHA -->
+    <section class="section" id="programas">
+        <div class="section-title reveal">
+            <span>EXPERIÊNCIAS ÚNICAS</span>
+            PROGRAMAS INSTITUTO METE MARCHA
+        </div>
+
+        <div class="programas-grid">
+            <!-- Programa 1: Clínica de Pilotagem -->
+            <div class="programa-card" id="programa-clinica">
+                <div class="programa-header">
+                    <div class="programa-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <h3>Clínica de Pilotagem</h3>
+                    <p class="programa-resumo">Um programa voltado para pessoas inexperientes ou entusiastas que querem ter o primeiro contato com o fórmula.</p>
+                    <button class="programa-btn" onclick="togglePrograma('clinica')">
+                        <i class="fas fa-arrow-right"></i> SAIBA MAIS
+                    </button>
+                </div>
+                <div class="programa-expansivel" id="clinicaContent">
+                    <p><strong>Para quem?</strong> Pessoas inexperientes ou entusiastas que querem ter o primeiro contato com o fórmula e entender como o dia de treino de um piloto profissional funciona!</p>
+                    <p><strong>O que você vai viver:</strong> Neste dia ímpar você irá aprender a base teórica através do nosso briefing e colocará os seus conhecimentos aprendidos em prática na pista acelerando o MG-15.</p>
+                    <p><strong>Inclui:</strong> Briefing completo, acompanhamento de instrutores profissionais, experiência ao volante do MG-15, certificado de participação.</p>
+                    <p style="margin-top: 1rem; color: var(--vermelho-claro);"><i class="fas fa-calendar-alt"></i> Vagas limitadas - Consulte disponibilidade</p>
+                </div>
+            </div>
+
+            <!-- Programa 2: Treinos Livres -->
+            <div class="programa-card" id="programa-treinos">
+                <div class="programa-header">
+                    <div class="programa-icon">
+                        <i class="fas fa-flag-checkered"></i>
+                    </div>
+                    <h3>Treinos Livres</h3>
+                    <p class="programa-resumo">Programa voltado para pilotos experientes que buscam aprimorar suas habilidades em pista com um fórmula.</p>
+                    <button class="programa-btn" onclick="togglePrograma('treinos')">
+                        <i class="fas fa-arrow-right"></i> SAIBA MAIS
+                    </button>
+                </div>
+                <div class="programa-expansivel" id="treinosContent">
+                    <p><strong>Para quem?</strong> Pilotos experientes e pilotos que já tenham passado pela Clínica de Pilotagem.</p>
+                    <p><strong>O que você vai viver:</strong> Se você tem interesse em aprimorar as suas habilidades em pista com um fórmula, este é o programa qualificado para você! Com liberdade e exclusividade, podendo desenvolver o próprio cronograma.</p>
+                    <p><strong>Diferenciais:</strong> Acompanhamento personalizado, desenvolvimento de cronograma próprio, telemetria avançada, análise de desempenho em pista.</p>
+                    <p style="margin-top: 1rem; color: var(--vermelho-claro);"><i class="fas fa-clock"></i> Sessões de 30min, 60min ou 120min</p>
+                </div>
+            </div>
+
+            <!-- Programa 3: Eventos Corporativos -->
+            <div class="programa-card" id="programa-corp">
+                <div class="programa-header">
+                    <div class="programa-icon">
+                        <i class="fas fa-briefcase"></i>
+                    </div>
+                    <h3>Eventos Corporativos</h3>
+                    <p class="programa-resumo">Experiências personalizadas e luxuosas para empresas e grupos que buscam adrenalina e automobilismo.</p>
+                    <button class="programa-btn" onclick="togglePrograma('corp')">
+                        <i class="fas fa-arrow-right"></i> SAIBA MAIS
+                    </button>
+                </div>
+                <div class="programa-expansivel" id="corpContent">
+                    <p><strong>Para quem?</strong> Empresas e pessoas, com ou sem experiência em pista. Ideal para eventos corporativos, grupos privados, ativações com funcionários ou clientes de alto padrão.</p>
+                    <p><strong>O que oferecemos:</strong> Experiências personalizadas e luxuosas para entusiastas que amam velocidade, adrenalina e automobilismo!</p>
+                    <p><strong>Formatos disponíveis:</strong> Dia completo de experiência, meio período, sessões de test drive, competições amistosas entre equipes, coquetel e premiação personalizada.</p>
+                    <p style="margin-top: 1rem; color: var(--vermelho-claro);"><i class="fas fa-star"></i> Atendimento personalizado para cada empresa</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Chamada para ação extra -->
+        <div style="text-align: center; margin-top: 3rem;">
+            <p style="font-size: 1.2rem; color: #475569; max-width: 800px; margin: 0 auto;">
+                <i class="fas fa-quote-left" style="color: var(--vermelho-principal);"></i> 
+                Nossa missão é guiar cada piloto a alcançar o seu melhor desempenho em pista, enquanto oferecemos treinamentos especializados para prepará-los para uma jornada de sucesso!
+            </p>
+        </div>
+    </section>
+
+    <!-- SEÇÃO DE VÍDEOS EM DESTAQUE -->
+    <section class="videos-destaque" id="videos">
+        <div class="videos-container">
+            <div class="videos-header reveal">
+                <h2>VÍDEOS <span>EM DESTAQUE</span></h2>
+                <p>Os melhores momentos da Fórmula Inter</p>
+            </div>
+            
+            <div class="videos-grid">
+                <!-- Vídeo 1 -->
+                <div class="video-card reveal-scale" onclick="window.open('https://www.youtube.com/watch?v=P6fC8LGerSM', '_blank')">
+                    <div class="video-thumbnail">
+                        <img src="https://i.ytimg.com/an_webp/UcCMVx__7BU/mqdefault_6s.webp?du=3000&sqp=CI3OyMwG&rs=AOn4CLAl80_Ol9gtybcLklAJmmjFSvG0mw" alt="Melhores Momentos">
+                        <div class="video-play">
+                            <i class="fas fa-play"></i>
+                        </div>
+                    </div>
+                    <div class="video-tag">DESTAQUE</div>
+                    <div class="video-info">
+                        <h3>Clínica de Pilotagem</h3>
+                        <p><i class="fas fa-eye"></i> 2.3 mil visualizações</p>
+                    </div>
+                </div>
+
+                <!-- Vídeo 2 -->
+                <div class="video-card reveal-scale" onclick="window.open('https://www.youtube.com/watch?v=0WYitw41jHw', '_blank')">
+                    <div class="video-thumbnail">
+                        <img src="https://i.ytimg.com/an_webp/0WYitw41jHw/mqdefault_6s.webp?du=3000&sqp=CNDRyMwG&rs=AOn4CLDQk50iNf4m2hqcyYg4TUFfP358ww" alt="Entrevista Exclusiva">
+                        <div class="video-play">
+                            <i class="fas fa-play"></i>
+                        </div>
+                    </div>
+                    <div class="video-tag">TREINO</div>
+                    <div class="video-info">
+                        <h3>Treino Autódromo de Piracicaba</h3>
+                        <p><i class="fas fa-eye"></i> 2 mil visualizações</p>
+                    </div>
+                </div>
+
+                <!-- Vídeo 3 -->
+                <div class="video-card reveal-scale" onclick="window.open('https://www.youtube.com/watch?v=Xdfk0M3vXFI', '_blank')">
+                    <div class="video-thumbnail">
+                        <img src="https://i.ytimg.com/an_webp/Xdfk0M3vXFI/mqdefault_6s.webp?du=3000&sqp=CKDvyMwG&rs=AOn4CLDJv7eJhZvMN-VkHEF_PVMr-3e9rg" alt="Onboard">
+                        <div class="video-play">
+                            <i class="fas fa-play"></i>
+                        </div>
+                    </div>
+                    <div class="video-tag">ONBOARD</div>
+                    <div class="video-info">
+                        <h3>Fórmula Inter 2024</h3>
+                        <p><i class="fas fa-eye"></i> 4 mil visualizações</p>
+                    </div>
+                </div>
+
+                <!-- Vídeo 4 -->
+                <div class="video-card reveal-scale" onclick="window.open('https://www.youtube.com/watch?v=pnAxtZxgTns', '_blank')">
+                    <div class="video-thumbnail">
+                        <img src="https://i.ytimg.com/an_webp/pnAxtZxgTns/mqdefault_6s.webp?du=3000&sqp=CIP0yMwG&rs=AOn4CLBGemPB1xLT1iQVqJuSn7DFqNnIwA" alt="Making Of">
+                        <div class="video-play">
+                            <i class="fas fa-play"></i>
+                        </div>
+                    </div>
+                    <div class="video-tag">EXCLUSIVO</div>
+                    <div class="video-info">
+                        <h3>Na subida da Montanha</h3>
+                        <p><i class="fas fa-eye"></i> 3.5 mil visualizações</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SEÇÃO GAME DE PISTAS -->
+    <section class="pistas-game" id="pistas">
+        <div class="pistas-container">
+            <div class="pistas-header reveal">
+                <h2>SELECIONE SUA <span>PISTA</span></h2>
+                <p>Escolha o circuito para acelerar!</p>
+            </div>
+            
+            <div class="pistas-carrossel">
+                <div class="carrossel-arrow" id="prevArrow" onclick="moverCarrossel('prev')">
+                    <i class="fas fa-chevron-left"></i>
+                </div>
+                
+                <div class="pistas-wrapper">
+                    <div class="pistas-grid" id="pistasGrid">
+                        <!-- Interlagos - SP -->
+                        <div class="pista-card" id="pista-sp" onclick="selecionarPista('sp')">
+                            <div class="pista-imagem">
+                                <img src="interlagos.png" alt="Autódromo de Interlagos">
+                                <div class="pista-overlay">
+                                    <i class="fas fa-flag-checkered"></i>
+                                </div>
+                            </div>
+                            <div class="pista-badge">LENDÁRIA</div>
+                            <div class="pista-info">
+                                <h3>INTERLAGOS</h3>
+                                <div class="pista-local"><i class="fas fa-map-marker-alt"></i> São Paulo - SP</div>
+                                <div class="pista-detalhes">
+                                    <span><i class="fas fa-ruler"></i> 4.309m</span>
+                                    <span><i class="fas fa-sync-alt"></i> 15 curvas</span>
+                                    <span><i class="fas fa-clock"></i> 1:10.5</span>
+                                </div>
+                                <button class="pista-select-btn" onclick="event.stopPropagation(); selecionarPista('sp')">SELECIONAR PISTA</button>
+                            </div>
+                        </div>
+
+                        <!-- Brasília - DF -->
+                        <div class="pista-card" id="pista-df" onclick="selecionarPista('df')">
+                            <div class="pista-imagem">
+                                <img src="brasilia.png" alt="Autódromo de Brasília">
+                                <div class="pista-overlay">
+                                    <i class="fas fa-flag-checkered"></i>
+                                </div>
+                            </div>
+                            <div class="pista-badge">RÁPIDA</div>
+                            <div class="pista-info">
+                                <h3>BRASÍLIA</h3>
+                                <div class="pista-local"><i class="fas fa-map-marker-alt"></i> Brasília - DF</div>
+                                <div class="pista-detalhes">
+                                    <span><i class="fas fa-ruler"></i> 5.476m</span>
+                                    <span><i class="fas fa-sync-alt"></i> 13 curvas</span>
+                                    <span><i class="fas fa-clock"></i> 1:48.2</span>
+                                </div>
+                                <button class="pista-select-btn" onclick="event.stopPropagation(); selecionarPista('df')">SELECIONAR PISTA</button>
+                            </div>
+                        </div>
+
+                        <!-- Goiânia - GO -->
+                        <div class="pista-card" id="pista-go" onclick="selecionarPista('go')">
+                            <div class="pista-imagem">
+                                <img src="goiania.png" alt="Autódromo de Goiânia">
+                                <div class="pista-overlay">
+                                    <i class="fas fa-flag-checkered"></i>
+                                </div>
+                            </div>
+                            <div class="pista-badge">TÉCNICA</div>
+                            <div class="pista-info">
+                                <h3>GOIÂNIA</h3>
+                                <div class="pista-local"><i class="fas fa-map-marker-alt"></i> Goiânia - GO</div>
+                                <div class="pista-detalhes">
+                                    <span><i class="fas fa-ruler"></i> 3.835m</span>
+                                    <span><i class="fas fa-sync-alt"></i> 12 curvas</span>
+                                    <span><i class="fas fa-clock"></i> 1:24.7</span>
+                                </div>
+                                <button class="pista-select-btn" onclick="event.stopPropagation(); selecionarPista('go')">SELECIONAR PISTA</button>
+                            </div>
+                        </div>
+
+                        <!-- Rio de Janeiro - RJ -->
+                        <div class="pista-card" id="pista-rj" onclick="selecionarPista('rj')">
+                            <div class="pista-imagem">
+                                <img src="riodejaneiro.png" alt="Autódromo do Rio de Janeiro">
+                                <div class="pista-overlay">
+                                    <i class="fas fa-flag-checkered"></i>
+                                </div>
+                            </div>
+                            <div class="pista-badge">MODERNA</div>
+                            <div class="pista-info">
+                                <h3>RIO DE JANEIRO</h3>
+                                <div class="pista-local"><i class="fas fa-map-marker-alt"></i> Rio de Janeiro - RJ</div>
+                                <div class="pista-detalhes">
+                                    <span><i class="fas fa-ruler"></i> 4.800m</span>
+                                    <span><i class="fas fa-sync-alt"></i> 14 curvas</span>
+                                    <span><i class="fas fa-clock"></i> 1:32.4</span>
+                                </div>
+                                <button class="pista-select-btn" onclick="event.stopPropagation(); selecionarPista('rj')">SELECIONAR PISTA</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="carrossel-arrow" id="nextArrow" onclick="moverCarrossel('next')">
+                    <i class="fas fa-chevron-right"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SEÇÃO AUTOMOBILISMO SUSTENTÁVEL -->
+    <section class="sustentavel-section" id="sustentavel">
+        <div class="sustentavel-content reveal">
+            <h2>AUTOMOBILISMO <span>SUSTENTÁVEL</span></h2>
+            <p>O automobilismo brasileiro tem como um de seus maiores marcos a trajetória da equipe Copersucar-Fittipaldi, idealizada por Wilson Fittipaldi Jr. e lançada oficialmente em 1975.</p>
+            <a href="javascript:void(0)" class="sustentavel-btn" id="historiaBtn" onclick="toggleHistoria()"><i class="fas fa-arrow-right"></i> CONHEÇA NOSSA HISTÓRIA</a>
+        </div>
+
+        <!-- CONTEÚDO EXPANSÍVEL DA HISTÓRIA COM EFEITO LÍQUIDO - AGORA SEM CORTE -->
+        <div class="historia-expansivel" id="historiaContent">
+            <div class="historia-grid">
+                <div class="historia-texto">
+                    <h3>A História do Automobilismo Sustentável</h3>
+                    
+                    <h4>O Marco da Equipe Copersucar-Fittipaldi</h4>
+                    <p>O automobilismo brasileiro tem como um de seus maiores marcos a trajetória da equipe Copersucar-Fittipaldi, idealizada por Wilson Fittipaldi Jr. e lançada oficialmente em 1975.</p>
+                    
+                    <p>O projeto contou com o apoio da cooperativa Copersucar e marcou a história como a primeira e única equipe brasileira na Fórmula 1. A estreia ocorreu no GP da Argentina em 1976, com o modelo FD01, apresentado em Brasília no ano anterior.</p>
+                    
+                    <p>O bicampeão mundial Emerson Fittipaldi, após conquistar os títulos de 1972 e 1974, deixou a McLaren para assumir o desafio de correr pela equipe da família.</p>
+                    
+                    <p>A melhor temporada foi em 1978, quando a equipe conquistou pódios e terminou em 7º lugar no Mundial de Construtores. Apesar das dificuldades técnicas enfrentadas em alguns modelos, como o FD04 e o F6, o projeto entrou para a história do automobilismo nacional.</p>
+                    
+                    <p>O automobilismo brasileiro consolidou-se ao longo das décadas com grande presença internacional, incluindo categorias como a Fórmula 1, Fórmula E e a Stock Car.</p>
+
+                    <h4>Sustentabilidade no Automobilismo</h4>
+                    <p>A Fórmula Inter, inspirada nesse legado histórico, busca alinhar esporte, inovação e responsabilidade ambiental.</p>
+                    
+                    <p>O automobilismo moderno vem investindo em:</p>
+                    <ul>
+                        <li>Combustíveis sustentáveis</li>
+                        <li>Tecnologias híbridas e elétricas</li>
+                        <li>Redução de emissão de carbono</li>
+                        <li>Desenvolvimento de materiais mais leves e eficientes</li>
+                    </ul>
+                    
+                    <p>A indústria automobilística sempre foi motor de progresso tecnológico no Brasil, e hoje amplia esse papel ao incorporar práticas sustentáveis e soluções energéticas mais limpas.</p>
+
+                    <h4>Função Social do Esporte</h4>
+                    <p>O esporte automobilístico também cumpre uma função social relevante:</p>
+                    <ul>
+                        <li>Celeiro de talentos: Incentivo a novos pilotos por meio de categorias de base.</li>
+                        <li>Oportunidades profissionais: Formação de engenheiros, mecânicos, estrategistas e profissionais de mídia.</li>
+                        <li>Engajamento e inspiração: Ídolos nacionais inspiram jovens a sonhar alto.</li>
+                        <li>Impacto cultural: O automobilismo é fenômeno de mídia e marketing, fortalecendo identidade e orgulho nacional.</li>
+                    </ul>
+                    
+                    <p>Desde a década de 1950, o Brasil mantém forte presença no cenário mundial, conectando tradição, inovação e desenvolvimento social.</p>
+                    
+                    <h4>Inovações e Futuro</h4>
+                    <p>O futuro do automobilismo passa necessariamente pela sustentabilidade. A Fórmula Inter está na vanguarda desse movimento no Brasil, desenvolvendo tecnologias que unem performance e respeito ao meio ambiente.</p>
+                    <p>Com a utilização de biocombustíveis e a compensação de carbono, a categoria se posiciona como referência em práticas sustentáveis no esporte a motor nacional.</p>
+                </div>
+                
+                <div class="historia-imagens">
+                    <!-- IMAGENS DE DEMONSTRAÇÃO -->
+                    <div class="historia-img-item">
+                        <img src="https://via.placeholder.com/400x300/ff0000/ffffff?text=Copersucar+Fittipaldi" alt="Equipe Copersucar-Fittipaldi" onerror="this.parentElement.innerHTML='<div class=img-placeholder><i class=fas fa-car></i><br>Copersucar</div>'">
+                        <div class="img-caption">Equipe Copersucar-Fittipaldi - 1975</div>
+                    </div>
+                    
+                    <div class="historia-img-item">
+                        <img src="https://via.placeholder.com/400x300/cc0000/ffffff?text=Emerson+Fittipaldi" alt="Emerson Fittipaldi" onerror="this.parentElement.innerHTML='<div class=img-placeholder><i class=fas fa-flag></i><br>Emerson</div>'">
+                        <div class="img-caption">Emerson Fittipaldi - Bicampeão Mundial</div>
+                    </div>
+                    
+                    <div class="historia-img-item">
+                        <img src="https://via.placeholder.com/400x300/aa0000/ffffff?text=FD01" alt="Modelo FD01" onerror="this.parentElement.innerHTML='<div class=img-placeholder><i class=fas fa-cog></i><br>FD01</div>'">
+                        <div class="img-caption">Modelo FD01 - Estreia em 1976</div>
+                    </div>
+                    
+                    <div class="historia-img-item">
+                        <img src="https://via.placeholder.com/400x300/990000/ffffff?text=Formula+Inter" alt="Fórmula Inter Sustentável" onerror="this.parentElement.innerHTML='<div class=img-placeholder><i class=fas fa-leaf></i><br>Sustentável</div>'">
+                        <div class="img-caption">Fórmula Inter - Automobilismo Sustentável</div>
+                    </div>
+                    
+                    <div class="historia-img-item" style="grid-column: span 2;">
+                        <div class="img-placeholder" style="flex-direction: column; gap: 1rem;">
+                            <i class="fas fa-tree" style="font-size: 3rem;"></i>
+                            <span>Compromisso com o Futuro</span>
+                        </div>
+                        <div class="img-caption">Carbono Zero - Compromisso Ambiental</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SEÇÃO ESPECIFICAÇÕES TÉCNICAS -->
+    <section class="section" id="especificacoes">
+        <div class="section-title reveal">
+            <span>O MONOPOSTO</span>
+            ESPECIFICAÇÕES TÉCNICAS
+        </div>
+
+        <!-- NOVA IMAGEM DO CARRO - SEM FUNDO, APENAS PNG COM SOMBRA -->
+        <div class="carro-image-container reveal-scale">
+            <div class="carro-image">
+                <img src="carro.png" alt="Fórmula Inter - Monoposto" onerror="this.onerror=null; this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTIwMCIgaGVpZ2h0PSI2MDAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0iIzJkMzc0OCIvPjx0ZXh0IHg9IjUwJSIgeT0iNTAlIiBmb250LXNpemU9IjQwIiBmaWxsPSJ3aGl0ZSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPkZvcm11bGEgSW50ZXIgLSBDYXJybzwvdGV4dD48L3N2Zz4=';">
+            </div>
+            <div class="carro-caption">
+                <i class="fas fa-chevron-left"></i> O MONOPOSTO DA FÓRMULA INTER <i class="fas fa-chevron-right"></i>
+            </div>
+        </div>
+
+        <div class="specs-grid">
+            <div class="spec-card reveal-left">
+                <h3><i class="fas fa-ruler"></i> DIMENSÕES</h3>
+                <ul class="spec-list">
+                    <li><i class="fas fa-arrow-left"></i> <strong>Comprimento:</strong> 4.320mm</li>
+                    <li><i class="fas fa-arrow-left"></i> <strong>Largura:</strong> 1.800mm</li>
+                    <li><i class="fas fa-arrow-up"></i> <strong>Altura:</strong> 1.000mm</li>
+                    <li><i class="fas fa-arrows-alt-h"></i> <strong>Entre eixos:</strong> 2.465mm</li>
+                    <li><i class="fas fa-weight-hanging"></i> <strong>Peso:</strong> 490 kg (a seco)</li>
+                </ul>
+            </div>
+
+            <div class="spec-card reveal-scale">
+                <h3><i class="fas fa-engine"></i> MOTOR</h3>
+                <ul class="spec-list">
+                    <li><i class="fas fa-microchip"></i> <strong>Motor:</strong> Ford 2.0L</li>
+                    <li><i class="fas fa-tachometer-alt"></i> <strong>Aspiração:</strong> Aspirado</li>
+                    <li><i class="fas fa-cogs"></i> <strong>Cilindros:</strong> 4 em linha, 16v</li>
+                    <li><i class="fas fa-gauge-high"></i> <strong>Potência:</strong> 180cv a 6000 rpm</li>
+                    <li><i class="fas fa-gauge"></i> <strong>Torque:</strong> 21kgfm a 6000 rpm</li>
+                </ul>
+            </div>
+
+            <div class="spec-card reveal-right">
+                <h3><i class="fas fa-gas-pump"></i> COMBUSTÍVEL E CÂMBIO</h3>
+                <ul class="spec-list">
+                    <li><i class="fas fa-fire"></i> <strong>Combustível:</strong> Etanol</li>
+                    <li><i class="fas fa-battery-full"></i> <strong>Capacidade:</strong> 30 litros</li>
+                    <li><i class="fas fa-cog"></i> <strong>Câmbio:</strong> 5 marchas em "H"</li>
+                    <li><i class="fas fa-hand-paper"></i> <strong>Engate:</strong> Manual</li>
+                </ul>
+            </div>
+
+            <div class="spec-card reveal-left">
+                <h3><i class="fas fa-shield-alt"></i> SEGURANÇA</h3>
+                <ul class="spec-list">
+                    <li><i class="fas fa-car"></i> <strong>Habitáculo:</strong> Fibra de carbono</li>
+                    <li><i class="fas fa-hard-hat"></i> <strong>Anel de segurança:</strong> Protetor de cabeça</li>
+                    <li><i class="fas fa-cube"></i> <strong>Crash Box Frontal:</strong> Estrutura no bico</li>
+                    <li><i class="fas fa-cubes"></i> <strong>Crash Box Lateral:</strong> Laterais</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- SEÇÃO: ETANOL E CARBONO ZERO -->
+    <section class="section" id="etanol-carbono">
+        <div class="section-title reveal">
+            <span>SUSTENTABILIDADE NA PISTA</span>
+            ETANOL E CARBONO ZERO
+        </div>
+
+        <div class="etanol-section">
+            <div class="etanol-content reveal">
+                <h2 class="etanol-title-large">O ETANOL NA FÓRMULA INTER <span>E A BUSCA POR CARBONO ZERO</span></h2>
+                
+                <div class="etanol-destaque-box">
+                    <p style="font-size: 1.2rem; color: white; font-style: italic;">
+                        <i class="fas fa-quote-left" style="color: var(--vermelho-principal); margin-right: 0.5rem;"></i>
+                        A Fórmula Inter já cumpriu o objetivo de reduzir a emissão de CO₂, tornando-se um 
+                        <strong>esporte de carbono zero</strong>. Isso significa que todas as atividades relacionadas à 
+                        competição não devem emitir carbono ou, caso emitam, precisam compensá-lo de alguma forma.
+                    </p>
+                </div>
+
+                <a href="javascript:void(0)" class="sustentavel-btn" id="etanolBtn" onclick="toggleEtanol()">
+                    <i class="fas fa-arrow-right"></i> CONHECER TECNOLOGIA
+                </a>
+            </div>
+
+            <!-- CONTEÚDO EXPANSÍVEL DO ETANOL - AGORA SEM CORTE -->
+            <div class="historia-expansivel" id="etanolContent" style="margin-top: 2rem;">
+                <div class="etanol-texto-completo">
+                    <h3>🔬 TECNOLOGIA DE COMBUSTÍVEL SUSTENTÁVEL</h3>
+                    
+                    <h4>📅 A JORNADA DO ETANOL NA FÓRMULA INTER</h4>
+                    
+                    <p><strong>2022:</strong> Os carros já utilizam <strong>10% de etanol na mistura do combustível</strong>. Segundo a Shell, essa composição é bastante semelhante à utilizada em carros de rua, diferenciando-se apenas na proporção de álcool.</p>
+                    
+                    <p><strong>2023 em diante:</strong> A categoria também passou a observar o impacto ambiental dos navios e aviões que transportam os equipamentos e os 22 carros que competem nas pistas ao redor do planeta.</p>
+
+                    <h4>🧪 INOVAÇÕES TECNOLÓGICAS</h4>
+                    
+                    <p><strong>Etanol de segunda geração:</strong> O combustível fornecido atualmente à Ferrari HP é feito com 10% de bioetanol de segunda geração, produzido a partir de resíduos de cana-de-açúcar de uma joint venture no Brasil.</p>
+                    
+                    <p><strong>Novos regulamentos:</strong> Agora será obrigatório utilizar <strong>20% de oxigenados totalmente sustentáveis</strong>, como o etanol, no combustível. Entretanto, os outros 80% precisarão ser desenvolvidos por meio de novas tecnologias.</p>
+                    
+                    <p>Essas inovações incluem biomassa, resíduos sólidos e, principalmente, a <strong>gasolina sintética</strong> — também conhecida como gasolina sem petróleo.</p>
+
+                    <h4>⚗️ GASOLINA SINTÉTICA</h4>
+                    <p>Essa "e-gasolina" é produzida por processos químicos que não utilizam petróleo. Em tecnologias como a da Porsche, por exemplo, ela pode até contribuir para a captura de carbono da atmosfera quando associada ao uso de eletricidade limpa.</p>
+                    
+                    <p>A parte chamada de <strong>"sustentáveis avançados"</strong>, onde o etanol se encaixa, inclui não apenas materiais de origem renovável, mas também substâncias sintetizadas em laboratório para atender às exigências dos novos motores de altíssimo desempenho.</p>
+                    
+                    <div class="etanol-destaque-box">
+                        <h4 style="color: var(--vermelho-principal); text-align: center;">🚗 OUTRAS MUDANÇAS NA CATEGORIA</h4>
+                        
+                        <p><strong>Dimensões dos carros:</strong> Os novos carros terão entre-eixos 20 cm menores e serão 15 cm mais largos, o que deve favorecer as ultrapassagens.</p>
+                        
+                        <p><strong>Peso:</strong> Os veículos também ficarão <strong>30 kg mais leves</strong> e contarão com pneus mais estreitos, reduzindo o arrasto e facilitando a aproximação de quem vem atrás.</p>
+                        
+                        <p><strong>Aerodinâmica ativa:</strong> A outra novidade importante será a estreia da aerodinâmica ativa na asa dianteira — uma espécie de segundo DRS — permitindo ajustes que favoreçam ultrapassagens, inclusive em curvas.</p>
+                        
+                        <p>Dessa forma, os pilotos poderão escolher diferentes configurações aerodinâmicas, equilibrando desempenho e consumo de combustível.</p>
+                    </div>
+                    
+                    <h4>✅ COMPROMISSO AMBIENTAL</h4>
+                    <p>A Fórmula Inter já cumpriu o objetivo de reduzir a emissão de CO₂, tornando-se um esporte de carbono zero. Isso significa que todas as atividades relacionadas à competição não devem emitir carbono ou, caso emitam, precisam compensá-lo de alguma forma.</p>
+                    
+                    <p>A categoria também investe em:</p>
+                    <ul>
+                        <li>Compensação de carbono das viagens e logística</li>
+                        <li>Uso de materiais recicláveis nos componentes dos carros</li>
+                        <li>Parcerias com empresas de energia limpa</li>
+                        <li>Programas de conscientização ambiental para pilotos e equipes</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SEÇÃO ECOSSISTEMA -->
+    <section class="section" id="ecossistema">
+        <div class="section-title reveal">
+            <span>MUITO ALÉM DAS PISTAS</span>
+            ECOSSISTEMA FÓRMULA INTER
+        </div>
+
+        <div class="ecosystem-grid">
+            <div class="eco-card reveal-scale">
+                <div class="eco-icon"><i class="fas fa-calendar-day"></i></div>
+                <h3>F. INTER DAY</h3>
+                <p>Desenvolvido com o objetivo de realizar os sonhos dos pilotos que sempre desejaram pilotar um fórmula.</p>
+            </div>
+            <div class="eco-card reveal-scale">
+                <div class="eco-icon"><i class="fas fa-chalkboard-teacher"></i></div>
+                <h3>WORKSHOP NO QG</h3>
+                <p>Conheça nossa base, fique perto dos carros expostos e aprenda mais sobre automobilismo.</p>
+            </div>
+            <div class="eco-card reveal-scale">
+                <div class="eco-icon"><i class="fas fa-trophy"></i></div>
+                <h3>CAMPEONATO</h3>
+                <p>08 etapas ao longo do ano. Um final de semana com várias atrações.</p>
+            </div>
+            <div class="eco-card reveal-scale">
+                <div class="eco-icon"><i class="fas fa-chart-line"></i></div>
+                <h3>CLÍNICA DE APERFEIÇOAMENTO</h3>
+                <p>Treinamento com formatos de alta performance para desenvolver habilidades.</p>
+            </div>
+            <div class="eco-card reveal-scale">
+                <div class="eco-icon"><i class="fas fa-paint-brush"></i></div>
+                <h3>EXPERIENCE</h3>
+                <p>Artista desenvolve arte em tempo real durante a etapa.</p>
+            </div>
+            <div class="eco-card reveal-scale">
+                <div class="eco-icon"><i class="fas fa-gamepad"></i></div>
+                <h3>CAMPEONATO VIRTUAL</h3>
+                <p>Em parceria com Reiza Simulador, presente no Automobilista 2.</p>
+            </div>
+            <div class="eco-card reveal-scale">
+                <div class="eco-icon"><i class="fas fa-car-side"></i></div>
+                <h3>FÓRMULA BIPOSTO</h3>
+                <p>O MG-15 de dois lugares para eventos, treinos e ativações.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- SEÇÃO COPA -->
+    <section class="section" id="copa">
+        <div class="copa-section">
+            <div class="copa-content">
+                <h2 class="reveal">COPA FÓRMULA INTER</h2>
+                <p class="reveal">Acelere sua carreira com a Fórmula Inter! Participe da melhor competição de monoposto do país.</p>
+                <div class="copa-stats reveal">
+                    <div class="copa-stat"><div class="number">08</div><div class="label">Etapas</div></div>
+                    <div class="copa-stat"><div class="number">180cv</div><div class="label">Potência</div></div>
+                    <div class="copa-stat"><div class="number">490kg</div><div class="label">Peso</div></div>
+                </div>
+                <a href="javascript:void(0)" class="btn reveal-scale" onclick="toggleForm()"><i class="fas fa-arrow-right"></i> INSCREVA-SE AGORA</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- SEÇÃO ICO LASTREADO EM CBIO -->
+    <section class="section" id="ico-cbio">
+        <div class="section-title reveal">
+            <span>INOVAÇÃO & SUSTENTABILIDADE</span>
+            ICO LASTREADO EM CBIO
+        </div>
+
+        <div class="sustentavel-section" style="margin-top: 0;">
+            <div class="sustentavel-content reveal">
+                <h2 class="ico-title-large">CRIPTOATIVO <span>LASTREADO EM CBIO</span></h2>
+                
+                <div class="ico-destaque-box">
+                    <p style="font-size: 1.3rem; max-width: 900px; margin: 0 auto 1.5rem;">
+                        A Fórmula Inter pretende lançar uma ICO (Initial Coin Offering) lastreada em CBIOs, 
+                        com o objetivo de financiar a expansão da categoria e a construção de novos carros.
+                    </p>
+                    
+                    <p style="font-size: 1.1rem; max-width: 800px; margin: 0 auto; color: rgba(255,255,255,0.9);">
+                        A estrutura proposta consiste na emissão de um criptoativo cujo valor estará vinculado a 
+                        <strong>créditos de descarbonização negociados na B3</strong>.
+                    </p>
+                </div>
+
+                <a href="javascript:void(0)" class="sustentavel-btn" id="icoBtn" onclick="toggleICO()">
+                    <i class="fas fa-arrow-right"></i> CONHECER PROJETO
+                </a>
+            </div>
+
+            <!-- CONTEÚDO EXPANSÍVEL DO ICO - AGORA SEM CORTE -->
+            <div class="historia-expansivel" id="icoContent" style="margin-top: 2rem;">
+                <div class="ico-texto-completo">
+                    <h3>📄 WHITEPAPER DO PROJETO</h3>
+                    
+                    <div class="ico-destaque-box">
+                        <p style="font-size: 1.1rem; color: white; font-style: italic;">
+                            <i class="fas fa-quote-left" style="color: var(--vermelho-principal); margin-right: 0.5rem;"></i>
+                            A Fórmula Inter pretende lançar uma ICO lastreada em CBIOs, com o objetivo de financiar a expansão da categoria e a construção de novos carros. A estrutura proposta consiste na emissão de um criptoativo cujo valor estará vinculado a créditos de descarbonização negociados na B3.
+                        </p>
+                    </div>
+                    
+                    <h4>⏱️ OFERTA</h4>
+                    <p>A oferta terá duração de <strong>180 dias</strong> e será dividida em rounds institucionais e varejistas, permitindo a captação progressiva de recursos até atingir o valor-alvo definido no projeto.</p>
+                    
+                    <h4>📋 ETAPAS DA ICO</h4>
+                    
+                    <div class="ico-timeline">
+                        <div class="ico-timeline-item">
+                            <div class="ico-timeline-number">1</div>
+                            <div class="ico-timeline-content">
+                                <h5>Whitepaper</h5>
+                                <p>Documento que apresentará: história da Fórmula Inter, modelo econômico do token, lastro em CBIO, casos de uso, estratégias de valorização e estrutura tecnológica da blockchain.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="ico-timeline-item">
+                            <div class="ico-timeline-number">2</div>
+                            <div class="ico-timeline-content">
+                                <h5>Estrutura Jurídica e Compliance</h5>
+                                <p>Análise do enquadramento regulatório perante a CVM para garantir que o token não seja caracterizado como valor mobiliário sem registro adequado.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="ico-timeline-item">
+                            <div class="ico-timeline-number">3</div>
+                            <div class="ico-timeline-content">
+                                <h5>Abertura da Oferta</h5>
+                                <p>Após divulgação do whitepaper e campanha de marketing, investidores poderão adquirir o ativo digital mediante pagamento em moeda fiduciária (via Pix) ou criptoativos.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="ico-timeline-item">
+                            <div class="ico-timeline-number">4</div>
+                            <div class="ico-timeline-content">
+                                <h5>Distribuição dos Tokens</h5>
+                                <p>Ao atingir o montante estabelecido, os tokens serão distribuídos proporcionalmente aos participantes da oferta.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h4>💻 CIÊNCIA DA TECNOLOGIA</h4>
+                    <p><strong>Tokenização</strong> é o processo de transformar um ativo real (como CBIO) em representação digital em blockchain. <strong>Blockchain</strong> é um livro-razão distribuído — basicamente um banco de dados público e imutável.</p>
+                    
+                    <p><strong>ICO (Initial Coin Offering)</strong> surgiu como modelo de captação no ecossistema cripto, principalmente após o sucesso do Ethereum em 2014. Antes disso, o caso da Ripple Labs foi um dos primeiros exemplos relevantes de distribuição de tokens (XRP).</p>
+
+                    <div class="ico-opinion-box">
+                        <h4 style="color: var(--vermelho-principal); text-align: center;">⚠️ OPINIÃO FIRME</h4>
+                        <p><i class="fas fa-quote-left" style="color: var(--vermelho-principal);"></i> Se a Fórmula Inter quer ser levada a sério, o discurso precisa ir além de "vamos emitir token para levantar dinheiro". O mercado já viu muitas promessas vazias. O diferencial aqui é o lastro ambiental real (CBIO) + narrativa de sustentabilidade no automobilismo. Isso conecta com ESG, descarbonização e mercado de carbono.</p>
+                        <p style="margin-top: 1rem;">Mas atenção: lastro não pode ser apenas retórico.</p>
+                        <ul class="ico-checklist">
+                            <li><i class="fas fa-check-circle"></i> 1 token = 1 CBIO?</li>
+                            <li><i class="fas fa-check-circle"></i> Haverá custódia comprovada?</li>
+                            <li><i class="fas fa-check-circle"></i> Auditoria independente?</li>
+                        </ul>
+                        <p style="font-weight: bold; color: var(--vermelho-claro);">Sem isso, vira marketing verde.</p>
+                    </div>
+
+                    <h4>👥 ECONOMIA COMPARTILHADA</h4>
+                    <p>Se os tokens derem acesso a benefícios (governança, participação em receitas, experiências, decisões da categoria), você está criando um ecossistema participativo — quase uma <strong>DAO (organização autônoma descentralizada)</strong>. Isso pode ser poderoso.</p>
+                    
+                    <h4>🧠 PONTO FILOSÓFICO</h4>
+                    <p>Estamos vendo a convergência de três coisas muito interessantes — <strong>esporte, finanças descentralizadas e mercado ambiental</strong>. É quase um laboratório econômico ambulante sobre rodas.</p>
+                    
+                    <h4>🎯 PRÓXIMOS PASSOS</h4>
+                    <p>A Fórmula Inter está em fase de desenvolvimento do projeto, com previsão de lançamento do whitepaper nos próximos meses. Investidores interessados podem se cadastrar para receber novidades e participar das rodadas de captação.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SEÇÃO CONTATO -->
+    <section class="section" id="contato">
+        <div class="section-title reveal">
+            <span>FALE COM A GENTE</span>
+            CONTATO E REDES SOCIAIS
+        </div>
+        <div class="contact-info reveal">
+            <p><i class="fas fa-phone"></i> <a href="tel:+5511939615119">(11) 93961-5119</a> <span style="margin: 0 1rem; color: var(--vermelho-principal);">|</span> <i class="fas fa-globe"></i> <a href="https://www.formulainter.com.br" target="_blank">www.formulainter.com.br</a></p>
+        </div>
+        <div class="social-links reveal-scale">
+            <a href="https://instagram.com/formulainter" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="https://facebook.com/formulainter" target="_blank"><i class="fab fa-facebook"></i></a>
+            <a href="https://youtube.com/formulainter" target="_blank"><i class="fab fa-youtube"></i></a>
+            <a href="https://tiktok.com/@formulainter" target="_blank"><i class="fab fa-tiktok"></i></a>
+        </div>
+        <p style="text-align: center; margin-top: 2rem; color: #64748b;"><i class="fas fa-at"></i> @formulainter em todas as plataformas</p>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>Instituto Mete Marcha</h4>
+                <p>Escola de pilotos em parceria com a Fórmula Inter. Formando a nova geração do automobilismo brasileiro.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Links Rápidos</h4>
+                <ul>
+                    <li><a href="#sobre">A Categoria</a></li>
+                    <li><a href="#programas">Programas</a></li>
+                    <li><a href="#especificacoes">O Carro</a></li>
+                    <li><a href="#videos">Vídeos</a></li>
+                    <li><a href="#pistas">Pistas</a></li>
+                    <li><a href="#sustentavel">Sustentável</a></li>
+                    <li><a href="#etanol-carbono">Etanol</a></li>
+                    <li><a href="#ecossistema">Ecossistema</a></li>
+                    <li><a href="#copa">Copa</a></li>
+                    <li><a href="#ico-cbio">ICO CBIO</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Contato</h4>
+                <ul>
+                    <li><i class="fas fa-phone"></i> (11) 93961-5119</li>
+                    <li><i class="fas fa-globe"></i> www.formulainter.com.br</li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Redes Sociais</h4>
+                <div style="display: flex; gap: 1rem; font-size: 1.5rem;">
+                    <i class="fab fa-instagram" onclick="window.open('https://instagram.com/formulainter')"></i>
+                    <i class="fab fa-facebook" onclick="window.open('https://facebook.com/formulainter')"></i>
+                    <i class="fab fa-youtube" onclick="window.open('https://youtube.com/formulainter')"></i>
+                    <i class="fab fa-tiktok" onclick="window.open('https://tiktok.com/@formulainter')"></i>
+                </div>
+            </div>
+        </div>
+      <div class="copyright">
+    <p>© 2026 Instituto Mete Marcha - Powered by <a href="https://www.behance.net/igorfermon" target="_blank" class="credito-dev">Igor Monção <i class="fas fa-crown"></i></a></p>
+</div>
+    </footer>
+
+    <script>
+        // Variáveis do carrossel
+        let currentIndex = 0;
+        let cardsPerView = 3;
+        const pistasGrid = document.getElementById('pistasGrid');
+        const prevArrow = document.getElementById('prevArrow');
+        const nextArrow = document.getElementById('nextArrow');
+        const totalCards = document.querySelectorAll('.pista-card').length;
+
+        // Função para atualizar o carrossel
+        function atualizarCarrossel() {
+            const cardWidth = document.querySelector('.pista-card')?.offsetWidth || 0;
+            const gap = 16; // 1rem em pixels
+            const deslocamento = currentIndex * (cardWidth + gap);
+            pistasGrid.style.transform = `translateX(-${deslocamento}px)`;
+            
+            // Atualizar estado das setas
+            if (prevArrow && nextArrow) {
+                prevArrow.classList.toggle('disabled', currentIndex === 0);
+                nextArrow.classList.toggle('disabled', currentIndex >= totalCards - cardsPerView);
+            }
+        }
+
+        // Função para mover o carrossel
+        function moverCarrossel(direcao) {
+            const maxIndex = totalCards - cardsPerView;
+            
+            if (direcao === 'prev' && currentIndex > 0) {
+                currentIndex--;
+            } else if (direcao === 'next' && currentIndex < maxIndex) {
+                currentIndex++;
+            }
+            
+            atualizarCarrossel();
+        }
+
+        // Função para selecionar pista
+        function selecionarPista(pista) {
+            // Remove seleção de todas as pistas
+            document.querySelectorAll('.pista-card').forEach(card => {
+                card.classList.remove('selecionada');
+            });
+            
+            // Adiciona seleção na pista clicada
+            const pistaSelecionada = document.getElementById(`pista-${pista}`);
+            pistaSelecionada.classList.add('selecionada');
+            
+            // Animação de confirmação
+            const botao = pistaSelecionada.querySelector('.pista-select-btn');
+            botao.innerHTML = '✓ PISTA SELECIONADA';
+            
+            // Feedback visual
+            alert(`Pista ${pistaSelecionada.querySelector('h3').textContent} selecionada! Prepare-se para acelerar! 🏁`);
+        }
+
+        // Função para efeitos de scroll (reveal)
+        function reveal() {
+            const reveals = document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale');
+            
+            reveals.forEach(element => {
+                const windowHeight = window.innerHeight;
+                const elementTop = element.getBoundingClientRect().top;
+                const elementVisible = 150;
+                
+                if (elementTop < windowHeight - elementVisible) {
+                    element.classList.add('active');
+                }
+            });
+        }
+
+        // Efeito de scroll no header
+        function headerScroll() {
+            const header = document.getElementById('header');
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        }
+
+        // Funções do menu
+        function toggleMenu() {
+            document.getElementById('mobileMenu').classList.toggle('active');
+            document.getElementById('overlay').classList.toggle('active');
+            document.querySelector('.hamburger').classList.toggle('active');
+        }
+
+        function toggleForm() {
+            const modal = document.getElementById('formModal');
+            const body = document.body;
+            
+            modal.classList.toggle('active');
+            body.classList.toggle('form-aberto');
+        }
+
+        function enviarFormulario(event) {
+            event.preventDefault();
+            alert('Inscrição realizada com sucesso! Entraremos em contato em breve.');
+            toggleForm();
+        }
+
+        function toggleHistoria() {
+            const historiaContent = document.getElementById('historiaContent');
+            const historiaBtn = document.getElementById('historiaBtn');
+            
+            historiaContent.classList.toggle('expandido');
+            
+            if (historiaContent.classList.contains('expandido')) {
+                historiaBtn.innerHTML = '<i class="fas fa-arrow-up"></i> FECHAR HISTÓRIA';
+                setTimeout(() => {
+                    historiaContent.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }, 300);
+            } else {
+                historiaBtn.innerHTML = '<i class="fas fa-arrow-right"></i> CONHEÇA NOSSA HISTÓRIA';
+            }
+        }
+
+        // Função para alternar a seção do ICO
+        function toggleICO() {
+            const icoContent = document.getElementById('icoContent');
+            const icoBtn = document.getElementById('icoBtn');
+            
+            icoContent.classList.toggle('expandido');
+            
+            if (icoContent.classList.contains('expandido')) {
+                icoBtn.innerHTML = '<i class="fas fa-arrow-up"></i> FECHAR PROJETO';
+                setTimeout(() => {
+                    icoContent.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }, 300);
+            } else {
+                icoBtn.innerHTML = '<i class="fas fa-arrow-right"></i> CONHECER PROJETO';
+            }
+        }
+
+        // Função para alternar a seção do Etanol
+        function toggleEtanol() {
+            const etanolContent = document.getElementById('etanolContent');
+            const etanolBtn = document.getElementById('etanolBtn');
+            
+            etanolContent.classList.toggle('expandido');
+            
+            if (etanolContent.classList.contains('expandido')) {
+                etanolBtn.innerHTML = '<i class="fas fa-arrow-up"></i> FECHAR TECNOLOGIA';
+                setTimeout(() => {
+                    etanolContent.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }, 300);
+            } else {
+                etanolBtn.innerHTML = '<i class="fas fa-arrow-right"></i> CONHECER TECNOLOGIA';
+            }
+        }
+
+        // Função para alternar os programas
+        function togglePrograma(programa) {
+            const content = document.getElementById(programa + 'Content');
+            const btn = event.currentTarget;
+            
+            content.classList.toggle('expandido');
+            
+            if (content.classList.contains('expandido')) {
+                btn.innerHTML = '<i class="fas fa-arrow-up"></i> FECHAR';
+                setTimeout(() => {
+                    content.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                }, 300);
+            } else {
+                btn.innerHTML = '<i class="fas fa-arrow-right"></i> SAIBA MAIS';
+            }
+        }
+
+        // Event Listeners
+        window.addEventListener('load', () => {
+            // Configurar cards por view baseado no tamanho da tela
+            function atualizarCardsPerView() {
+                if (window.innerWidth <= 768) {
+                    cardsPerView = 1;
+                    // Garantir que os cards ocupem 100% e não haja margens
+                    document.querySelectorAll('.pista-card').forEach(card => {
+                        card.style.margin = '0';
+                    });
+                } else if (window.innerWidth <= 1200) {
+                    cardsPerView = 2;
+                } else {
+                    cardsPerView = 3;
+                }
+                
+                // Resetar índice se necessário
+                const maxIndex = totalCards - cardsPerView;
+                if (currentIndex > maxIndex) {
+                    currentIndex = maxIndex;
+                }
+                
+                atualizarCarrossel();
+            }
+            
+            atualizarCardsPerView();
+            window.addEventListener('resize', atualizarCardsPerView);
+            
+            // Iniciar efeitos
+            reveal();
+        });
+
+        window.addEventListener('scroll', () => {
+            reveal();
+            headerScroll();
+        });
+
+        // Smooth scroll para links âncora
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                    if (window.innerWidth <= 768) {
+                        toggleMenu();
+                    }
+                }
+            });
+        });
+
+        // Fechar modal ao clicar fora
+        document.getElementById('formModal')?.addEventListener('click', function(e) {
+            if (e.target === this) {
+                toggleForm();
+            }
+        });
+    </script>
+</body>
+</html>
