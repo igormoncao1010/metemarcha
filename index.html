@@ -27,13 +27,23 @@
             overflow: hidden;
         }
 
-        /* CORES VERMELHAS */
+        /* CORES VERMELHAS ORIGINAIS E NOVAS CORES SUSTENTÁVEIS */
         :root {
             --vermelho-principal: #ff0000;
             --vermelho-claro: #ff4d4d;
             --vermelho-escuro: #cc0000;
             --vermelho-opaco: rgba(255, 0, 0, 0.1);
             --vermelho-gradiente: linear-gradient(135deg, #ff0000, #cc0000);
+            
+            /* NOVAS CORES SUSTENTÁVEIS */
+            --verde-sustentavel: #00a86b;
+            --verde-claro: #4caf7a;
+            --verde-escuro: #00875a;
+            --verde-amarelado: #7cb342;
+            --amarelo-bio: #ffd700;
+            --amarelo-claro: #ffed9e;
+            --verde-gradiente: linear-gradient(135deg, #00a86b, #00875a);
+            --verde-amarelo-gradiente: linear-gradient(135deg, #00a86b, #ffd700);
         }
 
         /* EFEITOS DE SCROLL - ANIMAÇÕES */
@@ -123,7 +133,7 @@
             100% { transform: translateX(-50%); }
         }
 
-        /* TOP BAR 2 - BARRA VERMELHA COM COTAÇÕES - APENAS LINHA FINA */
+        /* TOP BAR 2 - BARRA VERMELHA COM COTAÇÕES */
         .quotes-bar {
             background: var(--vermelho-principal);
             color: white;
@@ -176,7 +186,7 @@
             font-size: 0.75rem;
         }
 
-        /* Glass Header - AGORA COM ÍCONES DO LADO DO HAMBURGUER */
+        /* Glass Header */
         .header {
             background: rgba(10, 20, 30, 0.95);
             backdrop-filter: blur(12px);
@@ -199,7 +209,7 @@
             box-shadow: 0 10px 40px rgba(255, 0, 0, 0.2);
         }
 
-        /* Container do Logo SVG - MESMO ESTILO */
+        /* Container do Logo */
         .logo-container {
             height: 40px;
             width: auto;
@@ -212,26 +222,6 @@
             height: 40px;
         }
 
-        .logo-svg {
-            height: 100%;
-            width: auto;
-            background: rgba(255,255,255,0.1);
-            padding: 5px 15px;
-            border-radius: 8px;
-            border: 1px dashed rgba(255, 0, 0, 0.3);
-            color: rgba(255,255,255,0.5);
-            font-size: 0.9rem;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .logo-svg i {
-            color: var(--vermelho-principal);
-            font-size: 1.5rem;
-        }
-
-        /* Container da direita com ícones e hamburguer */
         .right-side {
             display: flex;
             align-items: center;
@@ -264,7 +254,7 @@
             transform: translateY(-2px) scale(1.1);
         }
 
-        /* Hamburger Icon - AGORA VISÍVEL EM TODAS AS TELAS */
+        /* Hamburger Icon */
         .hamburger {
             display: flex;
             flex-direction: column;
@@ -300,7 +290,7 @@
             transform: rotate(-45deg) translate(8px, -6px);
         }
 
-        /* Mobile/Desktop Menu - AGORA FUNCIONA PARA TODAS AS TELAS */
+        /* Mobile/Desktop Menu */
         .mobile-menu {
             position: fixed;
             top: 0;
@@ -408,7 +398,7 @@
             display: block;
         }
 
-        /* HERO SECTION - TOPADA NO MENU (SEM PADDING/MARGEM) */
+        /* HERO SECTION */
         .hero {
             position: relative;
             width: 100%;
@@ -419,7 +409,6 @@
             padding: 0;
         }
 
-        /* Vídeo Desktop */
         .hero-video-desktop {
             position: absolute;
             top: 0;
@@ -431,7 +420,6 @@
             display: block;
         }
 
-        /* Vídeo Mobile */
         .hero-video-mobile {
             position: absolute;
             top: 0;
@@ -443,7 +431,6 @@
             display: none;
         }
 
-        /* Overlay preto com opacidade */
         .hero-overlay {
             position: absolute;
             top: 0;
@@ -460,7 +447,6 @@
             50% { background: rgba(0, 0, 0, 0.5); }
         }
 
-        /* Conteúdo do Hero - ATUALIZADO SEM LOGO */
         .hero-content {
             position: relative;
             z-index: 2;
@@ -476,7 +462,6 @@
             color: white;
         }
 
-        /* NOVO TÍTULO PRINCIPAL */
         .hero-title {
             font-size: 4.5rem;
             font-weight: 800;
@@ -498,7 +483,6 @@
             font-size: 5rem;
         }
 
-        /* NOVO SUBTÍTULO */
         .hero-subtitle {
             font-size: 1.5rem;
             margin-bottom: 2rem;
@@ -539,7 +523,6 @@
             justify-content: center;
         }
 
-        /* MESMOS BOTÕES - AGORA VERMELHOS */
         .btn {
             background: var(--vermelho-principal);
             color: white;
@@ -592,7 +575,6 @@
             color: white;
         }
 
-        /* SEÇÕES - MANTIDAS IGUAL */
         .section {
             padding: 5rem 2rem;
         }
@@ -614,7 +596,7 @@
             margin-bottom: 0.5rem;
         }
 
-        /* NOVA SEÇÃO - PROGRAMAS DO INSTITUTO (CARDS EXPANSÍVEIS) */
+        /* SEÇÃO PROGRAMAS */
         .programas-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -738,7 +720,7 @@
             top: -0.3rem;
         }
 
-        /* NOVA SEÇÃO - VÍDEOS EM DESTAQUE (BEM CHAMATIVA) */
+        /* SEÇÃO VÍDEOS EM DESTAQUE */
         .videos-destaque {
             background: linear-gradient(135deg, #0a0f1a 0%, #1a1f2e 100%);
             padding: 5rem 2rem;
@@ -923,7 +905,7 @@
             50% { transform: scale(1.05); }
         }
 
-        /* NOVA SEÇÃO - GAME DE PISTAS (CARROSSEL COM SETAS) - ATUALIZADO PARA MOBILE GAMIFICADO */
+        /* SEÇÃO GAME DE PISTAS */
         .pistas-game {
             background: linear-gradient(135deg, #0a0f1a 0%, #1a1f2e 100%);
             padding: 5rem 2rem;
@@ -993,7 +975,6 @@
             margin: 0 auto;
         }
 
-        /* CARROSSEL DE PISTAS - VERSÃO GAMIFICADA */
         .pistas-carrossel {
             position: relative;
             display: flex;
@@ -1212,9 +1193,9 @@
             pointer-events: none;
         }
 
-        /* NOVA SEÇÃO - AUTOMOBILISMO SUSTENTÁVEL - ATUALIZADA COM EFEITO LÍQUIDO */
+        /* SEÇÃO AUTOMOBILISMO SUSTENTÁVEL - ESTILO VERDE E AMARELO */
         .sustentavel-section {
-            background: linear-gradient(135deg, #0a141e 0%, #1a1f2a 100%);
+            background: linear-gradient(135deg, #0a3a2a 0%, #1a4a3a 100%);
             padding: 4rem 2rem;
             margin: 2rem auto;
             max-width: 1200px;
@@ -1222,7 +1203,8 @@
             position: relative;
             overflow: hidden;
             color: white;
-            border: 1px solid rgba(255, 0, 0, 0.2);
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            box-shadow: 0 0 30px rgba(0, 168, 107, 0.2);
         }
 
         .sustentavel-section::before {
@@ -1232,13 +1214,29 @@
             right: -50%;
             width: 200%;
             height: 200%;
-            background: radial-gradient(circle, rgba(255, 0, 0, 0.05) 0%, transparent 50%);
-            animation: rotate 30s linear infinite;
+            background: radial-gradient(circle, rgba(255, 215, 0, 0.1) 0%, rgba(0, 168, 107, 0.1) 50%, transparent 70%);
+            animation: rotateSustentavel 30s linear infinite;
         }
 
-        @keyframes rotate {
+        .sustentavel-section::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--amarelo-bio), var(--verde-sustentavel), var(--amarelo-bio));
+            animation: pulseVerde 3s ease-in-out infinite;
+        }
+
+        @keyframes rotateSustentavel {
             from { transform: rotate(0deg); }
             to { transform: rotate(360deg); }
+        }
+
+        @keyframes pulseVerde {
+            0%, 100% { opacity: 0.5; transform: scaleX(1); }
+            50% { opacity: 1; transform: scaleX(1.05); }
         }
 
         .sustentavel-content {
@@ -1255,16 +1253,36 @@
             margin-bottom: 1rem;
             color: white;
             text-transform: uppercase;
+            text-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
         }
 
         .sustentavel-content h2 span {
-            color: var(--vermelho-principal);
+            color: var(--amarelo-bio);
+            background: linear-gradient(135deg, #ffd700, #7cb342);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            position: relative;
+            display: inline-block;
+        }
+
+        .sustentavel-content h2 span::after {
+            content: '🌿';
+            position: absolute;
+            top: -20px;
+            right: -30px;
+            font-size: 2rem;
+            animation: floatLeaf 3s ease-in-out infinite;
+        }
+
+        @keyframes floatLeaf {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-10px) rotate(10deg); }
         }
 
         .sustentavel-content p {
             font-size: 1.2rem;
             line-height: 1.6;
-            color: rgba(255,255,255,0.9);
+            color: rgba(255,255,255,0.95);
             max-width: 800px;
             margin: 0 auto 2rem;
         }
@@ -1274,8 +1292,8 @@
             align-items: center;
             gap: 0.5rem;
             background: transparent;
-            border: 2px solid var(--vermelho-principal);
-            color: var(--vermelho-principal);
+            border: 2px solid var(--amarelo-bio);
+            color: var(--amarelo-bio);
             padding: 0.8rem 2rem;
             border-radius: 50px;
             font-weight: 600;
@@ -1283,51 +1301,54 @@
             cursor: pointer;
             transition: 0.3s;
             text-decoration: none;
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.2);
         }
 
         .sustentavel-btn:hover {
-            background: var(--vermelho-principal);
+            background: var(--verde-sustentavel);
+            border-color: var(--verde-sustentavel);
             color: white;
             transform: scale(1.05);
-            box-shadow: 0 8px 20px rgba(255, 0, 0, 0.3);
+            box-shadow: 0 8px 30px rgba(0, 168, 107, 0.4);
         }
 
-        /* EFEITO LÍQUIDO ORGÂNICO PARA EXPANSÃO - CORRIGIDO PARA NÃO CORTAR CONTEÚDO */
+        /* EFEITO LÍQUIDO ORGÂNICO PARA EXPANSÃO - AGORA EM VERDE */
         .historia-expansivel {
             max-height: 0;
             opacity: 0;
             overflow: hidden;
             transition: max-height 1.5s cubic-bezier(0.77, 0, 0.175, 1), opacity 0.8s ease, margin 0.8s ease;
-            background: rgba(255, 255, 255, 0.05);
+            background: rgba(10, 58, 42, 0.95);
             border-radius: 30px;
             margin: 0;
             backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 0, 0, 0.1);
+            border: 1px solid rgba(255, 215, 0, 0.2);
             position: relative;
             z-index: 2;
             transform-origin: top center;
         }
 
         .historia-expansivel.expandido {
-            max-height: 4000px; /* Valor grande o suficiente para todo conteúdo */
+            max-height: 4000px;
             opacity: 1;
             margin: 2rem 0 0 0;
             padding: 2rem;
+            box-shadow: 0 0 50px rgba(0, 168, 107, 0.2);
         }
 
-        /* Efeito de onda líquida apenas quando expandido - SEM HOVER */
+        /* Efeito de onda líquida verde */
         .historia-expansivel.expandido {
-            animation: ondaLiquida 3s ease-in-out infinite;
+            animation: ondaVerde 3s ease-in-out infinite;
         }
 
-        @keyframes ondaLiquida {
+        @keyframes ondaVerde {
             0%, 100% { 
-                box-shadow: 0 -5px 20px rgba(255, 0, 0, 0.2);
-                border-top-color: rgba(255, 0, 0, 0.3);
+                box-shadow: 0 -5px 30px rgba(0, 168, 107, 0.3);
+                border-top-color: rgba(255, 215, 0, 0.4);
             }
             50% { 
-                box-shadow: 0 -15px 30px rgba(255, 0, 0, 0.4);
-                border-top-color: rgba(255, 0, 0, 0.6);
+                box-shadow: 0 -15px 50px rgba(255, 215, 0, 0.5);
+                border-top-color: rgba(0, 168, 107, 0.7);
             }
         }
 
@@ -1343,21 +1364,21 @@
         }
 
         .historia-texto h3 {
-            color: var(--vermelho-principal);
+            color: var(--amarelo-bio);
             font-size: 1.8rem;
             margin-bottom: 1.5rem;
-            border-bottom: 2px solid rgba(255, 0, 0, 0.3);
+            border-bottom: 2px solid rgba(255, 215, 0, 0.3);
             padding-bottom: 0.5rem;
         }
 
         .historia-texto h4 {
-            color: var(--vermelho-claro);
+            color: var(--verde-claro);
             font-size: 1.3rem;
             margin: 1.5rem 0 1rem;
         }
 
         .historia-texto p {
-            color: rgba(255, 255, 255, 0.9);
+            color: rgba(255, 255, 255, 0.95);
             line-height: 1.6;
             margin-bottom: 1rem;
         }
@@ -1371,38 +1392,40 @@
             margin-bottom: 0.8rem;
             padding-left: 1.5rem;
             position: relative;
-            color: rgba(255, 255, 255, 0.9);
+            color: rgba(255, 255, 255, 0.95);
         }
 
         .historia-texto li::before {
-            content: '•';
-            color: var(--vermelho-principal);
-            font-size: 1.5rem;
+            content: '🌱';
+            color: var(--verde-sustentavel);
+            font-size: 1rem;
             position: absolute;
             left: 0;
-            top: -0.3rem;
+            top: 0;
         }
 
         .historia-imagens {
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: repeat(2, 1fr);
             gap: 1rem;
             padding: 1rem;
+            width: 100%;
         }
 
         .historia-img-item {
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(0, 168, 107, 0.1);
             border-radius: 20px;
             overflow: hidden;
             aspect-ratio: 4/3;
-            border: 1px solid rgba(255, 0, 0, 0.2);
+            border: 1px solid rgba(255, 215, 0, 0.3);
             transition: 0.3s;
+            width: 100%;
         }
 
         .historia-img-item:hover {
             transform: scale(1.02);
-            border-color: var(--vermelho-principal);
-            box-shadow: 0 10px 30px rgba(255, 0, 0, 0.3);
+            border-color: var(--amarelo-bio);
+            box-shadow: 0 10px 30px rgba(255, 215, 0, 0.3);
         }
 
         .historia-img-item img {
@@ -1418,7 +1441,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            background: linear-gradient(135deg, #2a3a4a, #1a2a3a);
+            background: linear-gradient(135deg, #0a3a2a, #1a4a3a);
             color: white;
             font-size: 3rem;
             text-align: center;
@@ -1426,63 +1449,19 @@
         }
 
         .img-caption {
-            background: rgba(0,0,0,0.7);
+            background: rgba(0, 58, 42, 0.8);
             color: white;
             padding: 0.5rem;
             font-size: 0.8rem;
             text-align: center;
         }
 
-        /* ABOUT GRID - ATUALIZADO COM IMAGEM 01.png */
-        .about-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            align-items: center;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .about-text h2 {
-            font-size: 2rem;
-            margin-bottom: 1.5rem;
-            color: #1e293b;
-        }
-
-        .about-text p {
-            color: #475569;
-            line-height: 1.8;
-            margin-bottom: 1.5rem;
-        }
-
-        .about-image {
-            background: transparent;
-            border-radius: 30px;
-            padding: 0;
-            text-align: center;
-            overflow: hidden;
-        }
-
-        .about-image img {
-            width: 100%;
-            height: auto;
-            max-width: 500px;
-            border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(255, 0, 0, 0.2);
-            transition: transform 0.3s ease;
-        }
-
-        .about-image img:hover {
-            transform: scale(1.02);
-        }
-
-        /* SPECS GRID - MODIFICADO PARA INCLUIR A IMAGEM DO CARRO */
+        /* SEÇÃO ESPECIFICAÇÕES DO CARRO (mantida igual) */
         .specs-section {
             max-width: 1400px;
             margin: 0 auto;
         }
 
-        /* NOVA IMAGEM DO CARRO - SEM FUNDO, APENAS PNG */
         .carro-image-container {
             width: 100%;
             margin: 2rem auto 4rem;
@@ -1580,9 +1559,9 @@
             width: 120px;
         }
 
-        /* NOVA SEÇÃO: ETANOL E CARBONO ZERO - ESTILO CENTRALIZADO */
+        /* SEÇÃO: ETANOL E CARBONO ZERO - ESTILO VERDE E AMARELO */
         .etanol-section {
-            background: linear-gradient(135deg, #0a141e 0%, #1a1f2a 100%);
+            background: linear-gradient(135deg, #0a4a2a 0%, #1a5a3a 100%);
             padding: 4rem 2rem;
             margin: 2rem auto;
             max-width: 1200px;
@@ -1590,7 +1569,8 @@
             position: relative;
             overflow: hidden;
             color: white;
-            border: 1px solid rgba(255, 0, 0, 0.2);
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            box-shadow: 0 0 40px rgba(0, 168, 107, 0.3);
         }
 
         .etanol-section::before {
@@ -1600,8 +1580,29 @@
             right: -50%;
             width: 200%;
             height: 200%;
-            background: radial-gradient(circle, rgba(255, 0, 0, 0.05) 0%, transparent 50%);
-            animation: rotate 30s linear infinite;
+            background: radial-gradient(circle, rgba(255, 215, 0, 0.15) 0%, rgba(0, 168, 107, 0.15) 50%, transparent 70%);
+            animation: rotateEtanol 30s linear infinite;
+        }
+
+        .etanol-section::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--amarelo-bio), var(--verde-sustentavel), var(--amarelo-bio));
+            animation: pulseEtanol 2s ease-in-out infinite;
+        }
+
+        @keyframes rotateEtanol {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        @keyframes pulseEtanol {
+            0%, 100% { opacity: 0.5; transform: scaleX(1); }
+            50% { opacity: 1; transform: scaleX(1.02); }
         }
 
         .etanol-content {
@@ -1615,10 +1616,15 @@
         .etanol-title-large {
             font-size: 2.8rem;
             margin-bottom: 2rem;
+            color: white;
+            text-shadow: 0 0 20px rgba(0, 168, 107, 0.3);
         }
 
         .etanol-title-large span {
-            color: var(--vermelho-principal);
+            color: var(--amarelo-bio);
+            background: linear-gradient(135deg, #ffd700, #7cb342);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         .etanol-texto-completo {
@@ -1629,16 +1635,16 @@
         }
 
         .etanol-texto-completo h3 {
-            color: var(--vermelho-principal);
+            color: var(--amarelo-bio);
             font-size: 1.8rem;
             margin: 2rem 0 1rem;
-            border-bottom: 2px solid rgba(255, 0, 0, 0.3);
+            border-bottom: 2px solid rgba(255, 215, 0, 0.3);
             padding-bottom: 0.5rem;
             text-align: center;
         }
 
         .etanol-texto-completo h4 {
-            color: var(--vermelho-claro);
+            color: var(--verde-claro);
             font-size: 1.3rem;
             margin: 1.5rem 0 1rem;
         }
@@ -1646,11 +1652,11 @@
         .etanol-texto-completo p {
             line-height: 1.8;
             margin-bottom: 1.2rem;
-            color: rgba(255,255,255,0.9);
+            color: rgba(255,255,255,0.95);
         }
 
         .etanol-texto-completo strong {
-            color: var(--vermelho-principal);
+            color: var(--amarelo-bio);
         }
 
         .etanol-texto-completo ul {
@@ -1665,22 +1671,282 @@
         }
 
         .etanol-texto-completo li::before {
-            content: '•';
-            color: var(--vermelho-principal);
-            font-size: 1.5rem;
+            content: '🌿';
+            color: var(--verde-sustentavel);
+            font-size: 1rem;
             position: absolute;
             left: 0;
-            top: -0.3rem;
+            top: 0;
         }
 
         .etanol-destaque-box {
-            background: rgba(255,0,0,0.1);
+            background: rgba(0, 168, 107, 0.15);
+            border-left: 4px solid var(--amarelo-bio);
             padding: 1.5rem;
             border-radius: 20px;
             margin: 2rem 0;
+            box-shadow: 0 0 30px rgba(255, 215, 0, 0.1);
         }
 
-        /* NOVA SEÇÃO: ICO LASTREADO EM CBIO - ESTILO CENTRALIZADO */
+        /* ABOUT GRID */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .about-text h2 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: #1e293b;
+        }
+
+        .about-text p {
+            color: #475569;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+
+        .about-image {
+            background: transparent;
+            border-radius: 30px;
+            padding: 0;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .about-image img {
+            width: 100%;
+            height: auto;
+            max-width: 500px;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(255, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .about-image img:hover {
+            transform: scale(1.02);
+        }
+
+        /* ECOSYSTEM GRID */
+        .ecosystem-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .eco-card {
+            background: white;
+            border-radius: 24px;
+            padding: 2rem;
+            text-align: center;
+            border: 1px solid #e2e8f0;
+            transition: 0.3s;
+        }
+
+        .eco-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--vermelho-principal);
+            box-shadow: 0 20px 40px rgba(255, 0, 0, 0.1);
+        }
+
+        .eco-icon {
+            width: 80px;
+            height: 80px;
+            background: rgba(255, 0, 0, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-size: 2rem;
+            color: var(--vermelho-principal);
+        }
+
+        .eco-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: #1e293b;
+        }
+
+        .eco-card p {
+            color: #64748b;
+            line-height: 1.6;
+        }
+
+        /* COPA SECTION */
+        .copa-section {
+            background: linear-gradient(135deg, #0a141e, #1a2a3a);
+            color: white;
+            border-radius: 30px;
+            padding: 4rem;
+            margin: 2rem auto;
+            max-width: 1200px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .copa-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 0, 0, 0.1) 0%, transparent 50%);
+            animation: rotate 20s linear infinite;
+        }
+
+        .copa-content {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .copa-content h2 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--vermelho-principal), var(--vermelho-escuro));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .copa-stats {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin: 3rem 0;
+        }
+
+        .copa-stat .number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--vermelho-principal);
+        }
+
+        /* SEÇÃO PARCEIROS */
+        .parceiros-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .parceiros-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 3rem;
+            margin: 3rem auto;
+            max-width: 900px;
+        }
+
+        .parceiro-card {
+            background: linear-gradient(145deg, #ffffff, #f8fafc);
+            border-radius: 30px;
+            padding: 2rem;
+            border: 1px solid #e2e8f0;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .parceiro-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 0;
+            background: var(--vermelho-gradiente);
+            transition: height 0.4s ease;
+        }
+
+        .parceiro-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--vermelho-principal);
+            box-shadow: 0 20px 40px rgba(255, 0, 0, 0.1);
+        }
+
+        .parceiro-card:hover::before {
+            height: 100%;
+        }
+
+        .parceiro-logo {
+            width: 180px;
+            height: 180px;
+            margin: 0 auto 1.5rem;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1.5rem;
+            border: 1px solid #e2e8f0;
+            transition: all 0.3s ease;
+        }
+
+        .parceiro-card:hover .parceiro-logo {
+            border-color: var(--vermelho-principal);
+            transform: scale(1.02);
+            box-shadow: 0 0 30px rgba(255, 0, 0, 0.1);
+        }
+
+        .parceiro-logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            filter: grayscale(20%);
+            transition: filter 0.3s ease;
+        }
+
+        .parceiro-card:hover .parceiro-logo img {
+            filter: grayscale(0%);
+        }
+
+        .parceiro-logo i {
+            font-size: 5rem;
+            color: var(--vermelho-principal);
+            opacity: 0.7;
+        }
+
+        .parceiro-info h3 {
+            color: #1e293b;
+            font-size: 1.4rem;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .parceiro-info p {
+            color: #64748b;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .parceiros-descricao {
+            margin-top: 3rem;
+            padding: 2rem;
+            background: linear-gradient(135deg, #f8fafc, #ffffff);
+            border-radius: 30px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .parceiros-descricao p {
+            color: #475569;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* SEÇÃO ICO */
         .ico-section {
             padding: 5rem 2rem;
         }
@@ -1803,107 +2069,7 @@
             margin-right: 0.5rem;
         }
 
-        /* ECOSYSTEM GRID - IGUAL */
-        .ecosystem-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .eco-card {
-            background: white;
-            border-radius: 24px;
-            padding: 2rem;
-            text-align: center;
-            border: 1px solid #e2e8f0;
-            transition: 0.3s;
-        }
-
-        .eco-card:hover {
-            transform: translateY(-10px);
-            border-color: var(--vermelho-principal);
-            box-shadow: 0 20px 40px rgba(255, 0, 0, 0.1);
-        }
-
-        .eco-icon {
-            width: 80px;
-            height: 80px;
-            background: rgba(255, 0, 0, 0.1);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 1.5rem;
-            font-size: 2rem;
-            color: var(--vermelho-principal);
-        }
-
-        .eco-card h3 {
-            font-size: 1.3rem;
-            margin-bottom: 1rem;
-            color: #1e293b;
-        }
-
-        .eco-card p {
-            color: #64748b;
-            line-height: 1.6;
-        }
-
-        /* COPA SECTION - IGUAL */
-        .copa-section {
-            background: linear-gradient(135deg, #0a141e, #1a2a3a);
-            color: white;
-            border-radius: 30px;
-            padding: 4rem;
-            margin: 2rem auto;
-            max-width: 1200px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .copa-section::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            right: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(255, 0, 0, 0.1) 0%, transparent 50%);
-            animation: rotate 20s linear infinite;
-        }
-
-        .copa-content {
-            position: relative;
-            z-index: 1;
-            text-align: center;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .copa-content h2 {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            background: linear-gradient(135deg, var(--vermelho-principal), var(--vermelho-escuro));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .copa-stats {
-            display: flex;
-            justify-content: center;
-            gap: 3rem;
-            margin: 3rem 0;
-        }
-
-        .copa-stat .number {
-            font-size: 2.5rem;
-            font-weight: 800;
-            color: var(--vermelho-principal);
-        }
-
-        /* CONTATO - IGUAL */
+        /* CONTATO */
         .contact-info {
             text-align: center;
             margin: 2rem 0;
@@ -1940,7 +2106,7 @@
             transform: translateY(-3px) scale(1.1);
         }
 
-        /* FOOTER - IGUAL */
+        /* FOOTER */
         .footer {
             background: #0a141e;
             color: white;
@@ -2204,7 +2370,7 @@
             font-size: 1.2rem;
         }
 
-        /* RESPONSIVO - AJUSTADO PARA O NOVO LAYOUT GAMIFICADO */
+        /* RESPONSIVO */
         @media (max-width: 1200px) {
             .videos-grid {
                 grid-template-columns: repeat(2, 1fr);
@@ -2277,7 +2443,6 @@
                 font-size: 2.5rem;
             }
 
-            /* AJUSTE CRÍTICO - MOSTRAR APENAS 1 PISTA POR VEZ NO MOBILE */
             .pista-card {
                 flex: 0 0 calc(100% - 0rem);
                 margin: 0;
@@ -2292,7 +2457,6 @@
                 border-radius: 20px;
             }
 
-            /* Garantir que não haja margens que causem espaçamento */
             .pistas-grid {
                 gap: 0;
             }
@@ -2339,7 +2503,6 @@
                 font-size: 2rem;
             }
 
-            /* AJUSTE DO LOGO NO MOBILE */
             .logo-container {
                 height: 27px;
             }
@@ -2348,7 +2511,6 @@
                 height: 35px;
             }
 
-            /* AJUSTES MOBILE PARA BARRA DE COTAÇÕES */
             .quotes-bar {
                 padding: 0.3rem 0.5rem;
                 justify-content: flex-start;
@@ -2375,7 +2537,6 @@
                 100% { transform: translateX(-50%); }
             }
 
-            /* AJUSTE DA IMAGEM DO CARRO NO MOBILE */
             .carro-image-container {
                 margin: 1rem auto 2rem;
             }
@@ -2410,9 +2571,50 @@
             .historia-expansivel.expandido {
                 max-height: 4000px;
             }
+
+            .parceiros-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+                padding: 0 1rem;
+            }
+            
+            .parceiro-logo {
+                width: 150px;
+                height: 150px;
+            }
+            
+            .parceiro-logo i {
+                font-size: 4rem;
+            }
+            
+            .parceiro-info h3 {
+                font-size: 1.2rem;
+            }
+            
+            .parceiros-descricao {
+                padding: 1.5rem;
+                margin-top: 2rem;
+            }
+            
+            .parceiros-descricao p {
+                font-size: 1rem;
+            }
+
+            .historia-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .historia-imagens {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            
+            .historia-img-item[style*="grid-column: span 2"] {
+                grid-column: span 1 !important;
+            }
         }
 
-        /* AJUSTES PARA TABLET E DESKTOP */
         @media (min-width: 769px) {
             .quotes-container {
                 gap: 2rem;
@@ -2421,49 +2623,43 @@
             }
         }
 
+        .credito-dev {
+            color: var(--vermelho-principal);
+            font-weight: 700;
+            text-decoration: none;
+            position: relative;
+            display: inline-block;
+            animation: pulseDev 1.5s ease-in-out infinite;
+            text-shadow: 0 0 10px rgba(255, 0, 0, 0.3);
+        }
 
+        .credito-dev:hover {
+            animation: none;
+            transform: scale(1.1);
+            text-shadow: 0 0 20px rgba(255, 0, 0, 0.8);
+            transition: all 0.3s ease;
+        }
 
+        @keyframes pulseDev {
+            0% {
+                transform: scale(1);
+                text-shadow: 0 0 10px rgba(255, 0, 0, 0.3);
+            }
+            50% {
+                transform: scale(1.1);
+                text-shadow: 0 0 20px rgba(255, 0, 0, 0.8), 0 0 30px rgba(255, 0, 0, 0.5);
+            }
+            100% {
+                transform: scale(1);
+                text-shadow: 0 0 10px rgba(255, 0, 0, 0.3);
+            }
+        }
 
-
-        /* ANIMAÇÃO PARA O NOME DO DEV */
-.credito-dev {
-    color: var(--vermelho-principal);
-    font-weight: 700;
-    text-decoration: none;
-    position: relative;
-    display: inline-block;
-    animation: pulseDev 1.5s ease-in-out infinite;
-    text-shadow: 0 0 10px rgba(255, 0, 0, 0.3);
-}
-
-.credito-dev:hover {
-    animation: none;
-    transform: scale(1.1);
-    text-shadow: 0 0 20px rgba(255, 0, 0, 0.8);
-    transition: all 0.3s ease;
-}
-
-@keyframes pulseDev {
-    0% {
-        transform: scale(1);
-        text-shadow: 0 0 10px rgba(255, 0, 0, 0.3);
-    }
-    50% {
-        transform: scale(1.1);
-        text-shadow: 0 0 20px rgba(255, 0, 0, 0.8), 0 0 30px rgba(255, 0, 0, 0.5);
-    }
-    100% {
-        transform: scale(1);
-        text-shadow: 0 0 10px rgba(255, 0, 0, 0.3);
-    }
-}
-
-/* Ícone de destaque opcional */
-.credito-dev i {
-    font-size: 0.8rem;
-    margin-left: 4px;
-    opacity: 0.8;
-}
+        .credito-dev i {
+            font-size: 0.8rem;
+            margin-left: 4px;
+            opacity: 0.8;
+        }
     </style>
 </head>
 <body>
@@ -2481,21 +2677,18 @@
         </div>
     </div>
 
-    <!-- Glass Header - AGORA COM ÍCONES DO LADO DO HAMBURGUER -->
+    <!-- Glass Header -->
     <header class="header" id="header">
-        <!-- Espaço para seu logo SVG -->
         <div class="logo-container">
             <img src="logo1.png" alt="Instituto Mete Marcha" style="height: 100%; width: auto;">
         </div>
         
-        <!-- Container com ícones e hamburguer juntos -->
         <div class="right-side">
             <div class="header-icons">
                 <i class="fas fa-search"></i>
                 <i class="fas fa-user"></i>
             </div>
 
-            <!-- Hamburger Icon - VISÍVEL EM TODAS AS TELAS -->
             <div class="hamburger" onclick="toggleMenu()">
                 <span></span>
                 <span></span>
@@ -2504,7 +2697,6 @@
         </div>
     </header>
 
-    <!-- TOP BAR 2 - VERMELHA COM COTAÇÕES - APENAS LINHA FINA -->
     <div class="quotes-bar">
         <div class="quotes-container">
             <div class="quote-item">
@@ -2530,7 +2722,6 @@
         </div>
     </div>
 
-    <!-- Mobile/Desktop Menu - AGORA FUNCIONA PARA TODAS AS TELAS -->
     <div class="mobile-menu" id="mobileMenu">
         <ul>
             <li><a href="#home" onclick="toggleMenu()"><i class="fas fa-home"></i> Home</a></li>
@@ -2544,6 +2735,7 @@
             <li><a href="#ecossistema" onclick="toggleMenu()"><i class="fas fa-tree"></i> Ecossistema</a></li>
             <li><a href="#copa" onclick="toggleMenu()"><i class="fas fa-trophy"></i> Copa</a></li>
             <li><a href="#ico-cbio" onclick="toggleMenu()"><i class="fas fa-coins"></i> ICO CBIO</a></li>
+            <li><a href="#parceiros" onclick="toggleMenu()"><i class="fas fa-handshake"></i> Parceiros</a></li>
             <li><a href="#contato" onclick="toggleMenu()"><i class="fas fa-envelope"></i> Contato</a></li>
         </ul>
         
@@ -2555,10 +2747,8 @@
         </div>
     </div>
 
-    <!-- Overlay -->
     <div class="menu-overlay" id="overlay" onclick="toggleMenu()"></div>
 
-    <!-- FORMULÁRIO DE INSCRIÇÃO MODAL -->
     <div class="form-modal" id="formModal">
         <div class="form-container">
             <div class="form-close" onclick="toggleForm()">
@@ -2664,24 +2854,18 @@
         </div>
     </div>
 
-    <!-- HERO SECTION - ATUALIZADO SEM LOGO -->
     <section class="hero" id="home">
-        <!-- Vídeo Desktop -->
         <video class="hero-video-desktop" autoplay muted loop playsinline>
             <source src="01.mp4" type="video/mp4">
         </video>
 
-        <!-- Vídeo Mobile (diferente) -->
         <video class="hero-video-mobile" autoplay muted loop playsinline>
             <source src="01.mp4" type="video/mp4">
         </video>
         
-        <!-- Overlay preto -->
         <div class="hero-overlay"></div>
         
-        <!-- Conteúdo - SEM LOGO -->
         <div class="hero-content">
-            <!-- NOVO TÍTULO E SUBTÍTULO -->
             <h1 class="hero-title">
                 mete marcha <span>racing Academy</span>
             </h1>
@@ -2701,7 +2885,6 @@
         </div>
     </section>
 
-    <!-- SEÇÃO SOBRE A CATEGORIA -->
     <section class="section" id="sobre">
         <div class="section-title">
             <span>DESDE 2015</span>
@@ -2716,13 +2899,11 @@
                 <p>Temos um design de carro exclusivo, que visa a segurança e inovação, alinhados a muita tecnologia.</p>
             </div>
             <div class="about-image reveal-right">
-                <!-- IMAGEM 01.png NO LUGAR DO ÍCONE -->
                 <img src="01.png" alt="Fórmula Inter" onerror="this.onerror=null; this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNTAwIiBoZWlnaHQ9IjMwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjMmQzNzQ4Ii8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtc2l6ZT0iMjAiIGZpbGw9IndoaXRlIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkeT0iLjNlbSI+Rm9ybXVsYSBJbnRlcjwvdGV4dD48L3N2Zz4=';">
             </div>
         </div>
     </section>
 
-    <!-- NOVA SEÇÃO: PROGRAMAS DO INSTITUTO METE MARCHA -->
     <section class="section" id="programas">
         <div class="section-title reveal">
             <span>EXPERIÊNCIAS ÚNICAS</span>
@@ -2730,7 +2911,6 @@
         </div>
 
         <div class="programas-grid">
-            <!-- Programa 1: Clínica de Pilotagem -->
             <div class="programa-card" id="programa-clinica">
                 <div class="programa-header">
                     <div class="programa-icon">
@@ -2750,7 +2930,6 @@
                 </div>
             </div>
 
-            <!-- Programa 2: Treinos Livres -->
             <div class="programa-card" id="programa-treinos">
                 <div class="programa-header">
                     <div class="programa-icon">
@@ -2770,7 +2949,6 @@
                 </div>
             </div>
 
-            <!-- Programa 3: Eventos Corporativos -->
             <div class="programa-card" id="programa-corp">
                 <div class="programa-header">
                     <div class="programa-icon">
@@ -2791,7 +2969,6 @@
             </div>
         </div>
 
-        <!-- Chamada para ação extra -->
         <div style="text-align: center; margin-top: 3rem;">
             <p style="font-size: 1.2rem; color: #475569; max-width: 800px; margin: 0 auto;">
                 <i class="fas fa-quote-left" style="color: var(--vermelho-principal);"></i> 
@@ -2800,7 +2977,6 @@
         </div>
     </section>
 
-    <!-- SEÇÃO DE VÍDEOS EM DESTAQUE -->
     <section class="videos-destaque" id="videos">
         <div class="videos-container">
             <div class="videos-header reveal">
@@ -2809,7 +2985,6 @@
             </div>
             
             <div class="videos-grid">
-                <!-- Vídeo 1 -->
                 <div class="video-card reveal-scale" onclick="window.open('https://www.youtube.com/watch?v=P6fC8LGerSM', '_blank')">
                     <div class="video-thumbnail">
                         <img src="https://i.ytimg.com/an_webp/rZzKNvTsR_M/mqdefault_6s.webp?du=3000&sqp=CMOMzMwG&rs=AOn4CLDwkvkYbQAjx33P-r-Cp2dnPwLZtQ" alt="Melhores Momentos">
@@ -2824,7 +2999,6 @@
                     </div>
                 </div>
 
-                <!-- Vídeo 2 -->
                 <div class="video-card reveal-scale" onclick="window.open('https://www.youtube.com/watch?v=0WYitw41jHw', '_blank')">
                     <div class="video-thumbnail">
                         <img src="https://i.ytimg.com/an_webp/UcCMVx__7BU/mqdefault_6s.webp?du=3000&sqp=COvhy8wG&rs=AOn4CLCnM22IzsF8zJh5G35j_TwVp-N4jw" alt="Entrevista Exclusiva">
@@ -2839,7 +3013,6 @@
                     </div>
                 </div>
 
-                <!-- Vídeo 3 -->
                 <div class="video-card reveal-scale" onclick="window.open('https://www.youtube.com/watch?v=Xdfk0M3vXFI', '_blank')">
                     <div class="video-thumbnail">
                         <img src="https://i.ytimg.com/an_webp/Xdfk0M3vXFI/mqdefault_6s.webp?du=3000&sqp=CLiEzMwG&rs=AOn4CLCJNwPb-fmxLJt6CHqTMcEo276hOg" alt="Onboard">
@@ -2854,7 +3027,6 @@
                     </div>
                 </div>
 
-                <!-- Vídeo 4 -->
                 <div class="video-card reveal-scale" onclick="window.open('https://www.youtube.com/watch?v=pnAxtZxgTns', '_blank')">
                     <div class="video-thumbnail">
                         <img src="https://i.ytimg.com/an_webp/pnAxtZxgTns/mqdefault_6s.webp?du=3000&sqp=CJGGzMwG&rs=AOn4CLDGeIYiqJSvh7LY5LkuvdgWnB17ZA" alt="Making Of">
@@ -2872,7 +3044,6 @@
         </div>
     </section>
 
-    <!-- SEÇÃO GAME DE PISTAS -->
     <section class="pistas-game" id="pistas">
         <div class="pistas-container">
             <div class="pistas-header reveal">
@@ -2887,7 +3058,6 @@
                 
                 <div class="pistas-wrapper">
                     <div class="pistas-grid" id="pistasGrid">
-                        <!-- Interlagos - SP -->
                         <div class="pista-card" id="pista-sp" onclick="selecionarPista('sp')">
                             <div class="pista-imagem">
                                 <img src="interlagos.png" alt="Autódromo de Interlagos">
@@ -2908,7 +3078,6 @@
                             </div>
                         </div>
 
-                        <!-- Brasília - DF -->
                         <div class="pista-card" id="pista-df" onclick="selecionarPista('df')">
                             <div class="pista-imagem">
                                 <img src="brasilia.png" alt="Autódromo de Brasília">
@@ -2929,7 +3098,6 @@
                             </div>
                         </div>
 
-                        <!-- Goiânia - GO -->
                         <div class="pista-card" id="pista-go" onclick="selecionarPista('go')">
                             <div class="pista-imagem">
                                 <img src="goiania.png" alt="Autódromo de Goiânia">
@@ -2950,7 +3118,6 @@
                             </div>
                         </div>
 
-                        <!-- Rio de Janeiro - RJ -->
                         <div class="pista-card" id="pista-rj" onclick="selecionarPista('rj')">
                             <div class="pista-imagem">
                                 <img src="riodejaneiro.png" alt="Autódromo do Rio de Janeiro">
@@ -2980,19 +3147,18 @@
         </div>
     </section>
 
-    <!-- SEÇÃO AUTOMOBILISMO SUSTENTÁVEL -->
+    <!-- SEÇÃO AUTOMOBILISMO SUSTENTÁVEL - AGORA COM CORES VERDES E AMARELAS -->
     <section class="sustentavel-section" id="sustentavel">
         <div class="sustentavel-content reveal">
-            <h2>AUTOMOBILISMO <span>SUSTENTÁVEL</span></h2>
-            <p>O automobilismo brasileiro tem como um de seus maiores marcos a trajetória da equipe Copersucar-Fittipaldi, idealizada por Wilson Fittipaldi Jr. e lançada oficialmente em 1975.</p>
-            <a href="javascript:void(0)" class="sustentavel-btn" id="historiaBtn" onclick="toggleHistoria()"><i class="fas fa-arrow-right"></i> CONHEÇA NOSSA HISTÓRIA</a>
+            <h2>AUTOMOBILISMO <span>SUSTENTÁVEL 🌱</span></h2>
+            <p>O automobilismo brasileiro tem como um de seus maiores marcos a trajetória da equipe Copersucar-Fittipaldi, idealizada por Wilson Fittipaldi Jr. e lançada oficialmente em 1975. Hoje, seguimos com o compromisso de um futuro mais verde nas pistas.</p>
+            <a href="javascript:void(0)" class="sustentavel-btn" id="historiaBtn" onclick="toggleHistoria()"><i class="fas fa-leaf"></i> CONHEÇA NOSSA HISTÓRIA SUSTENTÁVEL</a>
         </div>
 
-        <!-- CONTEÚDO EXPANSÍVEL DA HISTÓRIA COM EFEITO LÍQUIDO - AGORA SEM CORTE -->
         <div class="historia-expansivel" id="historiaContent">
             <div class="historia-grid">
                 <div class="historia-texto">
-                    <h3>A História do Automobilismo Sustentável</h3>
+                    <h3>🌿 A História do Automobilismo Sustentável</h3>
                     
                     <h4>O Marco da Equipe Copersucar-Fittipaldi</h4>
                     <p>O automobilismo brasileiro tem como um de seus maiores marcos a trajetória da equipe Copersucar-Fittipaldi, idealizada por Wilson Fittipaldi Jr. e lançada oficialmente em 1975.</p>
@@ -3005,77 +3171,71 @@
                     
                     <p>O automobilismo brasileiro consolidou-se ao longo das décadas com grande presença internacional, incluindo categorias como a Fórmula 1, Fórmula E e a Stock Car.</p>
 
-                    <h4>Sustentabilidade no Automobilismo</h4>
+                    <h4>🌱 Sustentabilidade no Automobilismo</h4>
                     <p>A Fórmula Inter, inspirada nesse legado histórico, busca alinhar esporte, inovação e responsabilidade ambiental.</p>
                     
                     <p>O automobilismo moderno vem investindo em:</p>
                     <ul>
-                        <li>Combustíveis sustentáveis</li>
-                        <li>Tecnologias híbridas e elétricas</li>
-                        <li>Redução de emissão de carbono</li>
-                        <li>Desenvolvimento de materiais mais leves e eficientes</li>
+                        <li><i class="fas fa-leaf" style="color: var(--verde-sustentavel);"></i> Combustíveis sustentáveis como etanol de segunda geração</li>
+                        <li><i class="fas fa-bolt" style="color: var(--amarelo-bio);"></i> Tecnologias híbridas e elétricas</li>
+                        <li><i class="fas fa-cloud-sun" style="color: var(--verde-claro);"></i> Redução de emissão de carbono</li>
+                        <li><i class="fas fa-recycle" style="color: var(--verde-sustentavel);"></i> Desenvolvimento de materiais recicláveis e eficientes</li>
                     </ul>
                     
                     <p>A indústria automobilística sempre foi motor de progresso tecnológico no Brasil, e hoje amplia esse papel ao incorporar práticas sustentáveis e soluções energéticas mais limpas.</p>
 
-                    <h4>Função Social do Esporte</h4>
+                    <h4>🌎 Função Social do Esporte</h4>
                     <p>O esporte automobilístico também cumpre uma função social relevante:</p>
                     <ul>
-                        <li>Celeiro de talentos: Incentivo a novos pilotos por meio de categorias de base.</li>
-                        <li>Oportunidades profissionais: Formação de engenheiros, mecânicos, estrategistas e profissionais de mídia.</li>
-                        <li>Engajamento e inspiração: Ídolos nacionais inspiram jovens a sonhar alto.</li>
-                        <li>Impacto cultural: O automobilismo é fenômeno de mídia e marketing, fortalecendo identidade e orgulho nacional.</li>
+                        <li><i class="fas fa-trophy" style="color: var(--amarelo-bio);"></i> Celeiro de talentos: Incentivo a novos pilotos por meio de categorias de base.</li>
+                        <li><i class="fas fa-users" style="color: var(--verde-claro);"></i> Oportunidades profissionais: Formação de engenheiros, mecânicos, estrategistas e profissionais de mídia.</li>
+                        <li><i class="fas fa-heart" style="color: var(--vermelho-principal);"></i> Engajamento e inspiração: Ídolos nacionais inspiram jovens a sonhar alto.</li>
+                        <li><i class="fas fa-globe-americas" style="color: var(--verde-sustentavel);"></i> Impacto cultural: O automobilismo é fenômeno de mídia e marketing, fortalecendo identidade e orgulho nacional.</li>
                     </ul>
                     
                     <p>Desde a década de 1950, o Brasil mantém forte presença no cenário mundial, conectando tradição, inovação e desenvolvimento social.</p>
                     
-                    <h4>Inovações e Futuro</h4>
+                    <h4>🔬 Inovações e Futuro</h4>
                     <p>O futuro do automobilismo passa necessariamente pela sustentabilidade. A Fórmula Inter está na vanguarda desse movimento no Brasil, desenvolvendo tecnologias que unem performance e respeito ao meio ambiente.</p>
                     <p>Com a utilização de biocombustíveis e a compensação de carbono, a categoria se posiciona como referência em práticas sustentáveis no esporte a motor nacional.</p>
                 </div>
                 
                 <div class="historia-imagens">
-                    <!-- IMAGENS DE DEMONSTRAÇÃO -->
                     <div class="historia-img-item">
-                        <img src="https://via.placeholder.com/400x300/ff0000/ffffff?text=Copersucar+Fittipaldi" alt="Equipe Copersucar-Fittipaldi" onerror="this.parentElement.innerHTML='<div class=img-placeholder><i class=fas fa-car></i><br>Copersucar</div>'">
-                        <div class="img-caption">Equipe Copersucar-Fittipaldi - 1975</div>
+                        <img src="https://i2.wp.com/files.agro20.com.br/uploads/2019/09/copersucar-02.jpg?fit=1636%2C1087&ssl=1" alt="Equipe Copersucar-Fittipaldi" onerror="this.parentElement.innerHTML='<div class=img-placeholder><i class=fas fa-car style=color:var(--amarelo-bio);></i><br>Copersucar</div>'">
+                        <div class="img-caption">🌿 Equipe Copersucar-Fittipaldi - 1975</div>
                     </div>
                     
                     <div class="historia-img-item">
-                        <img src="https://via.placeholder.com/400x300/cc0000/ffffff?text=Emerson+Fittipaldi" alt="Emerson Fittipaldi" onerror="this.parentElement.innerHTML='<div class=img-placeholder><i class=fas fa-flag></i><br>Emerson</div>'">
-                        <div class="img-caption">Emerson Fittipaldi - Bicampeão Mundial</div>
+                        <img src="https://www.sportsoftheday.com/wp-content/uploads/2022/09/19s-7.jpg" alt="Emerson Fittipaldi" onerror="this.parentElement.innerHTML='<div class=img-placeholder><i class=fas fa-flag style=color:var(--amarelo-bio);></i><br>Emerson</div>'">
+                        <div class="img-caption">🏆 Emerson Fittipaldi - Bicampeão Mundial</div>
                     </div>
                     
                     <div class="historia-img-item">
-                        <img src="https://via.placeholder.com/400x300/aa0000/ffffff?text=FD01" alt="Modelo FD01" onerror="this.parentElement.innerHTML='<div class=img-placeholder><i class=fas fa-cog></i><br>FD01</div>'">
-                        <div class="img-caption">Modelo FD01 - Estreia em 1976</div>
+                        <img src="https://cronicasmacaenses.com/wp-content/uploads/2014/04/velocult-2014-fittipaldi-f1-fd01-04.jpg?w=680" alt="Modelo FD01" onerror="this.parentElement.innerHTML='<div class=img-placeholder><i class=fas fa-cog style=color:var(--verde-sustentavel);></i><br>FD01</div>'">
+                        <div class="img-caption">⚙️ Modelo FD01 - Estreia em 1976</div>
                     </div>
                     
                     <div class="historia-img-item">
-                        <img src="https://via.placeholder.com/400x300/990000/ffffff?text=Formula+Inter" alt="Fórmula Inter Sustentável" onerror="this.parentElement.innerHTML='<div class=img-placeholder><i class=fas fa-leaf></i><br>Sustentável</div>'">
-                        <div class="img-caption">Fórmula Inter - Automobilismo Sustentável</div>
+                        <img src="https://diariodocomercio.com.br/wp-content/uploads/2023/07/Sustentabilidade-Pixabay.jpg" alt="Fórmula Inter Sustentável" onerror="this.parentElement.innerHTML='<div class=img-placeholder><i class=fas fa-leaf style=color:var(--verde-sustentavel);></i><br>Sustentável</div>'">
+                        <div class="img-caption">🌱 Fórmula Inter - Automobilismo Sustentável</div>
                     </div>
                     
                     <div class="historia-img-item" style="grid-column: span 2;">
-                        <div class="img-placeholder" style="flex-direction: column; gap: 1rem;">
-                            <i class="fas fa-tree" style="font-size: 3rem;"></i>
-                            <span>Compromisso com o Futuro</span>
-                        </div>
-                        <div class="img-caption">Carbono Zero - Compromisso Ambiental</div>
+                        <img src="https://jbconstrucao.com/wp-content/uploads/2024/11/Texto-do-seu-paragrafo-2024-11-20T065216.857.jpg" alt="Compromisso com o Futuro" onerror="this.parentElement.innerHTML='<div class=img-placeholder style=flex-direction:column;gap:1rem;><i class=fas fa-tree style=font-size:3rem;color:var(--verde-sustentavel);></i><span style=color:var(--amarelo-bio);>Compromisso com o Futuro</span></div>'">
+                        <div class="img-caption">🌎 Carbono Zero - Compromisso Ambiental</div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- SEÇÃO ESPECIFICAÇÕES TÉCNICAS -->
     <section class="section" id="especificacoes">
         <div class="section-title reveal">
-            <span>O MONOPOSTO</span>
-            ESPECIFICAÇÕES TÉCNICAS
+            <span>TECNOLOGIA E PERFORMANCE</span>
+            O MONOPOSTO FÓRMULA INTER
         </div>
 
-        <!-- NOVA IMAGEM DO CARRO - SEM FUNDO, APENAS PNG COM SOMBRA -->
         <div class="carro-image-container reveal-scale">
             <div class="carro-image">
                 <img src="carro.png" alt="Fórmula Inter - Monoposto" onerror="this.onerror=null; this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTIwMCIgaGVpZ2h0PSI2MDAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0iIzJkMzc0OCIvPjx0ZXh0IHg9IjUwJSIgeT0iNTAlIiBmb250LXNpemU9IjQwIiBmaWxsPSJ3aGl0ZSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPkZvcm11bGEgSW50ZXIgLSBDYXJybzwvdGV4dD48L3N2Zz4=';">
@@ -3130,7 +3290,7 @@
         </div>
     </section>
 
-    <!-- SEÇÃO: ETANOL E CARBONO ZERO -->
+    <!-- SEÇÃO: ETANOL E CARBONO ZERO - AGORA COM CORES VERDES E AMARELAS -->
     <section class="section" id="etanol-carbono">
         <div class="section-title reveal">
             <span>SUSTENTABILIDADE NA PISTA</span>
@@ -3139,23 +3299,22 @@
 
         <div class="etanol-section">
             <div class="etanol-content reveal">
-                <h2 class="etanol-title-large">O ETANOL NA FÓRMULA INTER <span>E A BUSCA POR CARBONO ZERO</span></h2>
+                <h2 class="etanol-title-large">⚡ O ETANOL NA FÓRMULA INTER <span>E A BUSCA POR CARBONO ZERO</span></h2>
                 
                 <div class="etanol-destaque-box">
                     <p style="font-size: 1.2rem; color: white; font-style: italic;">
-                        <i class="fas fa-quote-left" style="color: var(--vermelho-principal); margin-right: 0.5rem;"></i>
+                        <i class="fas fa-quote-left" style="color: var(--amarelo-bio); margin-right: 0.5rem;"></i>
                         A Fórmula Inter já cumpriu o objetivo de reduzir a emissão de CO₂, tornando-se um 
-                        <strong>esporte de carbono zero</strong>. Isso significa que todas as atividades relacionadas à 
+                        <strong style="color: var(--amarelo-bio);">esporte de carbono zero</strong>. Isso significa que todas as atividades relacionadas à 
                         competição não devem emitir carbono ou, caso emitam, precisam compensá-lo de alguma forma.
                     </p>
                 </div>
 
                 <a href="javascript:void(0)" class="sustentavel-btn" id="etanolBtn" onclick="toggleEtanol()">
-                    <i class="fas fa-arrow-right"></i> CONHECER TECNOLOGIA
+                    <i class="fas fa-leaf"></i> CONHECER TECNOLOGIA VERDE
                 </a>
             </div>
 
-            <!-- CONTEÚDO EXPANSÍVEL DO ETANOL - AGORA SEM CORTE -->
             <div class="historia-expansivel" id="etanolContent" style="margin-top: 2rem;">
                 <div class="etanol-texto-completo">
                     <h3>🔬 TECNOLOGIA DE COMBUSTÍVEL SUSTENTÁVEL</h3>
@@ -3180,7 +3339,7 @@
                     <p>A parte chamada de <strong>"sustentáveis avançados"</strong>, onde o etanol se encaixa, inclui não apenas materiais de origem renovável, mas também substâncias sintetizadas em laboratório para atender às exigências dos novos motores de altíssimo desempenho.</p>
                     
                     <div class="etanol-destaque-box">
-                        <h4 style="color: var(--vermelho-principal); text-align: center;">🚗 OUTRAS MUDANÇAS NA CATEGORIA</h4>
+                        <h4 style="color: var(--amarelo-bio); text-align: center;">🚗 OUTRAS MUDANÇAS NA CATEGORIA</h4>
                         
                         <p><strong>Dimensões dos carros:</strong> Os novos carros terão entre-eixos 20 cm menores e serão 15 cm mais largos, o que deve favorecer as ultrapassagens.</p>
                         
@@ -3196,17 +3355,16 @@
                     
                     <p>A categoria também investe em:</p>
                     <ul>
-                        <li>Compensação de carbono das viagens e logística</li>
-                        <li>Uso de materiais recicláveis nos componentes dos carros</li>
-                        <li>Parcerias com empresas de energia limpa</li>
-                        <li>Programas de conscientização ambiental para pilotos e equipes</li>
+                        <li><i class="fas fa-leaf" style="color: var(--verde-sustentavel);"></i> Compensação de carbono das viagens e logística</li>
+                        <li><i class="fas fa-recycle" style="color: var(--verde-sustentavel);"></i> Uso de materiais recicláveis nos componentes dos carros</li>
+                        <li><i class="fas fa-solar-panel" style="color: var(--amarelo-bio);"></i> Parcerias com empresas de energia limpa</li>
+                        <li><i class="fas fa-tree" style="color: var(--verde-sustentavel);"></i> Programas de conscientização ambiental para pilotos e equipes</li>
                     </ul>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- SEÇÃO ECOSSISTEMA -->
     <section class="section" id="ecossistema">
         <div class="section-title reveal">
             <span>MUITO ALÉM DAS PISTAS</span>
@@ -3252,7 +3410,6 @@
         </div>
     </section>
 
-    <!-- SEÇÃO COPA -->
     <section class="section" id="copa">
         <div class="copa-section">
             <div class="copa-content">
@@ -3268,7 +3425,6 @@
         </div>
     </section>
 
-    <!-- SEÇÃO ICO LASTREADO EM CBIO -->
     <section class="section" id="ico-cbio">
         <div class="section-title reveal">
             <span>INOVAÇÃO & SUSTENTABILIDADE</span>
@@ -3296,7 +3452,6 @@
                 </a>
             </div>
 
-            <!-- CONTEÚDO EXPANSÍVEL DO ICO - AGORA SEM CORTE -->
             <div class="historia-expansivel" id="icoContent" style="margin-top: 2rem;">
                 <div class="ico-texto-completo">
                     <h3>📄 WHITEPAPER DO PROJETO</h3>
@@ -3377,7 +3532,42 @@
         </div>
     </section>
 
-    <!-- SEÇÃO CONTATO -->
+    <section class="section" id="parceiros">
+        <div class="section-title reveal">
+            <span>QUEM CONFIA NA GENTE</span>
+            PARCEIROS INSTITUCIONAIS
+        </div>
+
+        <div class="parceiros-container">
+            <div class="parceiros-grid reveal-scale">
+                <div class="parceiro-card">
+                    <div class="parceiro-logo">
+                        <img src="logo2.png" alt="Parceiro 1" onerror="this.onerror=null; this.parentElement.innerHTML='<i class=fas fa-industry></i><span>Logo Parceiro 1</span>'">
+                    </div>
+                    <div class="parceiro-info">
+                        <h3>CBIO Carbon</h3>
+                        <p>Parceiro oficial desde 2026</p>
+                    </div>
+                </div>
+
+                <div class="parceiro-card">
+                    <div class="parceiro-logo">
+                        <img src="logo3.png" alt="Parceiro 2" onerror="this.onerror=null; this.parentElement.innerHTML='<i class=fas fa-industry></i><span>Logo Parceiro 2</span>'">
+                    </div>
+                    <div class="parceiro-info">
+                        <h3>Anhembi Morumbi</h3>
+                        <p>Parceiro oficial desde 2020</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="parceiros-descricao reveal">
+                <p><i class="fas fa-handshake" style="color: var(--vermelho-principal); margin-right: 0.5rem;"></i> Junte-se a nós e faça parte desse ecossistema de inovação e sustentabilidade no automobilismo brasileiro.</p>
+                <a href="#contato" class="btn-outline" style="display: inline-block; margin-top: 1rem; padding: 0.5rem 2rem; border-radius: 50px; text-decoration: none;">SEJA UM PARCEIRO</a>
+            </div>
+        </div>
+    </section>
+
     <section class="section" id="contato">
         <div class="section-title reveal">
             <span>FALE COM A GENTE</span>
@@ -3395,12 +3585,11 @@
         <p style="text-align: center; margin-top: 2rem; color: #64748b;"><i class="fas fa-at"></i> @formulainter em todas as plataformas</p>
     </section>
 
-    <!-- FOOTER -->
     <footer class="footer">
         <div class="footer-content">
             <div class="footer-section">
                 <h4>Instituto Mete Marcha</h4>
-                <p>Escola de pilotos em parceria com a Fórmula Inter. Formando a nova geração do automobilismo brasileiro.</p>
+                <p>Escola de pilotos em parceria com a Fórmula Inter. Formando a nova geração do automobilismo brasileiro com compromisso sustentável.</p>
             </div>
             <div class="footer-section">
                 <h4>Links Rápidos</h4>
@@ -3415,6 +3604,7 @@
                     <li><a href="#ecossistema">Ecossistema</a></li>
                     <li><a href="#copa">Copa</a></li>
                     <li><a href="#ico-cbio">ICO CBIO</a></li>
+                    <li><a href="#parceiros">Parceiros</a></li>
                 </ul>
             </div>
             <div class="footer-section">
@@ -3434,9 +3624,9 @@
                 </div>
             </div>
         </div>
-      <div class="copyright">
-    <p>© 2026 Instituto Mete Marcha - Powered by <a href="https://www.behance.net/igorfermon" target="_blank" class="credito-dev">Igor Monção <i class="fas fa-crown"></i></a></p>
-</div>
+        <div class="copyright">
+            <p>© 2026 Instituto Mete Marcha - Powered by <a href="https://www.behance.net/igorfermon" target="_blank" class="credito-dev">Igor Monção <i class="fas fa-crown"></i></a></p>
+        </div>
     </footer>
 
     <script>
@@ -3448,21 +3638,18 @@
         const nextArrow = document.getElementById('nextArrow');
         const totalCards = document.querySelectorAll('.pista-card').length;
 
-        // Função para atualizar o carrossel
         function atualizarCarrossel() {
             const cardWidth = document.querySelector('.pista-card')?.offsetWidth || 0;
-            const gap = 16; // 1rem em pixels
+            const gap = 16;
             const deslocamento = currentIndex * (cardWidth + gap);
             pistasGrid.style.transform = `translateX(-${deslocamento}px)`;
             
-            // Atualizar estado das setas
             if (prevArrow && nextArrow) {
                 prevArrow.classList.toggle('disabled', currentIndex === 0);
                 nextArrow.classList.toggle('disabled', currentIndex >= totalCards - cardsPerView);
             }
         }
 
-        // Função para mover o carrossel
         function moverCarrossel(direcao) {
             const maxIndex = totalCards - cardsPerView;
             
@@ -3475,26 +3662,20 @@
             atualizarCarrossel();
         }
 
-        // Função para selecionar pista
         function selecionarPista(pista) {
-            // Remove seleção de todas as pistas
             document.querySelectorAll('.pista-card').forEach(card => {
                 card.classList.remove('selecionada');
             });
             
-            // Adiciona seleção na pista clicada
             const pistaSelecionada = document.getElementById(`pista-${pista}`);
             pistaSelecionada.classList.add('selecionada');
             
-            // Animação de confirmação
             const botao = pistaSelecionada.querySelector('.pista-select-btn');
             botao.innerHTML = '✓ PISTA SELECIONADA';
             
-            // Feedback visual
             alert(`Pista ${pistaSelecionada.querySelector('h3').textContent} selecionada! Prepare-se para acelerar! 🏁`);
         }
 
-        // Função para efeitos de scroll (reveal)
         function reveal() {
             const reveals = document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale');
             
@@ -3509,7 +3690,6 @@
             });
         }
 
-        // Efeito de scroll no header
         function headerScroll() {
             const header = document.getElementById('header');
             if (window.scrollY > 100) {
@@ -3519,7 +3699,6 @@
             }
         }
 
-        // Funções do menu
         function toggleMenu() {
             document.getElementById('mobileMenu').classList.toggle('active');
             document.getElementById('overlay').classList.toggle('active');
@@ -3552,11 +3731,10 @@
                     historiaContent.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 }, 300);
             } else {
-                historiaBtn.innerHTML = '<i class="fas fa-arrow-right"></i> CONHEÇA NOSSA HISTÓRIA';
+                historiaBtn.innerHTML = '<i class="fas fa-leaf"></i> CONHEÇA NOSSA HISTÓRIA SUSTENTÁVEL';
             }
         }
 
-        // Função para alternar a seção do ICO
         function toggleICO() {
             const icoContent = document.getElementById('icoContent');
             const icoBtn = document.getElementById('icoBtn');
@@ -3573,7 +3751,6 @@
             }
         }
 
-        // Função para alternar a seção do Etanol
         function toggleEtanol() {
             const etanolContent = document.getElementById('etanolContent');
             const etanolBtn = document.getElementById('etanolBtn');
@@ -3586,11 +3763,10 @@
                     etanolContent.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 }, 300);
             } else {
-                etanolBtn.innerHTML = '<i class="fas fa-arrow-right"></i> CONHECER TECNOLOGIA';
+                etanolBtn.innerHTML = '<i class="fas fa-leaf"></i> CONHECER TECNOLOGIA VERDE';
             }
         }
 
-        // Função para alternar os programas
         function togglePrograma(programa) {
             const content = document.getElementById(programa + 'Content');
             const btn = event.currentTarget;
@@ -3607,13 +3783,10 @@
             }
         }
 
-        // Event Listeners
         window.addEventListener('load', () => {
-            // Configurar cards por view baseado no tamanho da tela
             function atualizarCardsPerView() {
                 if (window.innerWidth <= 768) {
                     cardsPerView = 1;
-                    // Garantir que os cards ocupem 100% e não haja margens
                     document.querySelectorAll('.pista-card').forEach(card => {
                         card.style.margin = '0';
                     });
@@ -3623,7 +3796,6 @@
                     cardsPerView = 3;
                 }
                 
-                // Resetar índice se necessário
                 const maxIndex = totalCards - cardsPerView;
                 if (currentIndex > maxIndex) {
                     currentIndex = maxIndex;
@@ -3635,7 +3807,6 @@
             atualizarCardsPerView();
             window.addEventListener('resize', atualizarCardsPerView);
             
-            // Iniciar efeitos
             reveal();
         });
 
@@ -3644,7 +3815,6 @@
             headerScroll();
         });
 
-        // Smooth scroll para links âncora
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
                 e.preventDefault();
@@ -3658,7 +3828,6 @@
             });
         });
 
-        // Fechar modal ao clicar fora
         document.getElementById('formModal')?.addEventListener('click', function(e) {
             if (e.target === this) {
                 toggleForm();
